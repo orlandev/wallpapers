@@ -1,6 +1,7 @@
 package com.ondev.wallpapers
 
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,9 @@ class WallpaperAdapter(
 ) : RecyclerView.Adapter<WallpaperAdapter.WallpaperViewHolder>() {
     inner class WallpaperViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageWallpaper: ImageView = itemView.findViewById(R.id.image_view_parallax_effect)
+
+        val backWallpaper: ImageView = itemView.findViewById(R.id.back_wallpaper)
+
     }
 
     override fun onCreateViewHolder(
@@ -31,6 +35,11 @@ class WallpaperAdapter(
 
     override fun onBindViewHolder(holder: WallpaperViewHolder, position: Int) {
         val currentWallpaperItem = wallpaperItems[position]
+
+        holder.backWallpaper.setOnClickListener(View.OnClickListener {
+            Log.d("BACK_WALLPAPER", "Clicked!!")
+        })
+
         Glide.with(holder.imageWallpaper.context)
             .load(Uri.parse("$ASSETS_FOLDER${currentWallpaperItem.WallpaperFileName}"))
             .transition(DrawableTransitionOptions.withCrossFade())
