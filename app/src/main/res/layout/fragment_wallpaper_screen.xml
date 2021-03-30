@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <ImageView
             android:id="@+id/image_view_parallax_effect"
@@ -11,6 +13,51 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             />
+
+        <ImageView
+            android:id="@+id/back_wallpaper"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="32dp"
+            android:clickable="true"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/share_app"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/share_app"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:clickable="true"
+            android:src="@drawable/ic_baseline_share_24"
+            app:layout_constraintEnd_toStartOf="@+id/set_wallpaper"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/back_wallpaper"
+            app:layout_constraintTop_toTopOf="@+id/back_wallpaper" />
+
+        <ImageView
+            android:id="@+id/set_wallpaper"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:clickable="true"
+            android:src="@drawable/ic_baseline_wallpaper_24"
+            app:layout_constraintEnd_toStartOf="@+id/next_wallpaper"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/share_app"
+            app:layout_constraintTop_toTopOf="@+id/share_app" />
+
+        <ImageView
+            android:id="@+id/next_wallpaper"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:clickable="true"
+            android:src="@drawable/ic_baseline_navigate_next_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/set_wallpaper"
+            app:layout_constraintTop_toTopOf="@+id/set_wallpaper" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

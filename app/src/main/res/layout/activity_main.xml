@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true"
     tools:context=".MainActivity">
+
+
     <fragment
         android:id="@+id/nav_host"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -14,5 +16,10 @@
         app:defaultNavHost="true"
         app:navGraph="@navigation/app_navigation"
         tools:ignore="FragmentTagUsage"
-        tools:layout="@layout/fragment_wallpaper_screen" />
+        tools:layout="@layout/fragment_wallpaper_screen"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="51dp" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
