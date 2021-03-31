@@ -1,5 +1,6 @@
 package com.ondev.wallpapers
 
+import android.app.Activity
 import android.app.WallpaperManager
 import android.graphics.Bitmap
 import android.net.Uri
@@ -8,9 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ProgressBar
 import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import kotlinx.coroutines.GlobalScope
@@ -26,8 +27,8 @@ class WallpaperAdapter(
     inner class WallpaperViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageWallpaper: ImageView = itemView.findViewById(R.id.image_view_parallax_effect)
         val backWallpaper: ImageView = itemView.findViewById(R.id.back_wallpaper)
+        val nextWallpaper: ImageView = itemView.findViewById(R.id.next_wallpaper)
         val setWallpaper: ImageView = itemView.findViewById(R.id.set_wallpaper)
-        val setWallProgress: ProgressBar = itemView.findViewById(R.id.progress_bar)
     }
 
     override fun onCreateViewHolder(
@@ -44,7 +45,17 @@ class WallpaperAdapter(
         val currentWallpaperItem = wallpaperItems[position]
 
         holder.backWallpaper.setOnClickListener(View.OnClickListener {
-            Log.d("BACK_WALLPAPER", "Clicked!!")
+            var viewPager =
+                (it.context as Activity).findViewById<ViewPager2>(R.id.view_page_wallpaper)
+            val currentPageIndex = viewPager.currentItem
+            if (currentPageIndex > 0)
+                viewPager.setCurrentItem(viewPager.currentItem - 1, true)
+        })
+        holder.nextWallpaper.setOnClickListener(View.OnClickListener {
+            var viewPager =
+                (it.context as Activity).findViewById<ViewPager2>(R.id.view_page_wallpaper)
+            if (viewPager.currentItem < wallpaperItems.size)
+                viewPager.setCurrentItem(viewPager.currentItem + 1, true)
         })
 
         holder.setWallpaper.setOnClickListener(View.OnClickListener {
@@ -52,8 +63,6 @@ class WallpaperAdapter(
                 setWallpaper(it, holder.imageWallpaper.drawable.toBitmap())
             }
         })
-
-
         Glide.with(holder.imageWallpaper.context)
             .load(Uri.parse(currentWallpaperItem.wallpaperFileName))
             .transition(DrawableTransitionOptions.withCrossFade())
