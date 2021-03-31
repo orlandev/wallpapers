@@ -2,5 +2,5 @@ package com.ondev.wallpapers
 
 
 data class WallpaperItem(
-    var WallpaperFileName: String
+    var wallpaperFileName: String
 )

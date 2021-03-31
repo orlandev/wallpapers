@@ -4,15 +4,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/image_view_parallax_effect"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            />
+            android:scaleType="centerCrop" />
 
         <ImageView
             android:id="@+id/back_wallpaper"
@@ -32,6 +30,7 @@
             android:layout_height="24dp"
             android:clickable="true"
             android:src="@drawable/ic_baseline_share_24"
+            android:tooltipText="Compartir"
             app:layout_constraintEnd_toStartOf="@+id/set_wallpaper"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/back_wallpaper"
@@ -43,6 +42,7 @@
             android:layout_height="24dp"
             android:clickable="true"
             android:src="@drawable/ic_baseline_wallpaper_24"
+            android:tooltipText="Establecer como fondo de pantalla"
             app:layout_constraintEnd_toStartOf="@+id/next_wallpaper"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/share_app"
@@ -53,11 +53,21 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:clickable="true"
-            android:src="@drawable/ic_baseline_navigate_next_24"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/set_wallpaper"
             app:layout_constraintTop_toTopOf="@+id/set_wallpaper" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/image_view_parallax_effect"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/image_view_parallax_effect"
+            app:layout_constraintTop_toTopOf="@+id/image_view_parallax_effect" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
