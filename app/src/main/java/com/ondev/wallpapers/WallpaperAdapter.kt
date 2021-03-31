@@ -9,14 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
-import androidx.annotation.Nullable
+import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -53,9 +49,10 @@ class WallpaperAdapter(
 
         holder.setWallpaper.setOnClickListener(View.OnClickListener {
             GlobalScope.launch {
-                setWallpaper(it, currentWallpaperItem.wallpaperFileName)
+                setWallpaper(it, holder.imageWallpaper.drawable.toBitmap())
             }
         })
+
 
         Glide.with(holder.imageWallpaper.context)
             .load(Uri.parse(currentWallpaperItem.wallpaperFileName))
@@ -63,35 +60,12 @@ class WallpaperAdapter(
             .into(holder.imageWallpaper)
     }
 
-    private fun setWallpaper(view: View, filename: String) {
-        Glide.with(view.context)
-            .asBitmap().load(filename)
-            .listener(object : RequestListener<Bitmap?> {
-                override fun onLoadFailed(
-                    @Nullable e: GlideException?,
-                    o: Any?,
-                    target: Target<Bitmap?>?,
-                    b: Boolean
-                ): Boolean {
-                    return false
-                }
+    private fun setWallpaper(view: View, bitmap: Bitmap) {
 
-                override fun onResourceReady(
-                    bitmap: Bitmap?,
-                    o: Any?,
-                    target: Target<Bitmap?>?,
-                    dataSource: DataSource?,
-                    b: Boolean
-                ): Boolean {
-                    //zoomImage.setImage(ImageSource.bitmap(bitmap))
-                    val wallpaperManager =
-                        WallpaperManager.getInstance(view.context.applicationContext)
-                    wallpaperManager.setBitmap(bitmap)
-                    Log.d("SET_WALLPAPER", "WALLPAPER SETTED")
-                    return false
-                }
-            }
-            ).submit()
+        val wallpaperManager =
+            WallpaperManager.getInstance(view.context.applicationContext)
+        wallpaperManager.setBitmap(bitmap)
+        Log.d("SET_WALLPAPER", "WALLPAPER SETTED")
 
     }
 

@@ -22,7 +22,7 @@ class WallpaperFragment : Fragment() {
         FragmentWallpaperViewpagerBinding.inflate(inflater, container, false).also { binding = it }
 
         val wallpaperItems =
-            (1..18).map { WallpaperItem("${ASSETS_FOLDER}images/wallpaper$it.jpg") }
+            (1..25).map { WallpaperItem("${ASSETS_FOLDER}images/wallpaper$it.jpg") }
 
         binding.viewPageWallpaper.adapter = WallpaperAdapter(
             wallpaperItems
