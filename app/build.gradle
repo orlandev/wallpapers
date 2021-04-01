@@ -73,6 +73,8 @@ dependencies {
     //Preferences
     implementation "androidx.datastore:datastore-preferences:$rootProject.dataStorePreferencesVersion"
 
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
     // Testing dependencies
     testImplementation "junit:junit:$rootProject.junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.junitAndroidExtVersion"

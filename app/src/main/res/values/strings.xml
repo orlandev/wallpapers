@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Wallpapers</string>
+    <string name="app_share_text">"Mira estos fondos de pantalla que buenos están. descarga la app desde https://apklist/Qu35t64/com.ondev.wallpapers"</string>
+    <string name="share_by">Elija por donde desea compartir</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_developer">Orlando Novas Rodriguez</string>
+    <string name="open_source">OpenSource</string>
+    <string name="github_url">https://github.com/Qu35t64</string>
 </resources>

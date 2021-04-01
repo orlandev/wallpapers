@@ -1,5 +1,6 @@
 package com.ondev.wallpapers
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +38,23 @@ class WallpaperFragment : Fragment() {
         binding.viewPageWallpaper.setPageTransformer(WallpaperTransformer())
 
         return binding.root
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            PERMISSION_WRITE_EXTERNAL_STORAGE -> {
+                if ((grantResults.isNotEmpty() &&
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ) {
+                    ShareIt(this.requireContext())
+                }
+            }
+        }
     }
 
 

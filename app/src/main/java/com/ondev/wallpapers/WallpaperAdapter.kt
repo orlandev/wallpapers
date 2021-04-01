@@ -1,19 +1,23 @@
 package com.ondev.wallpapers
 
+import android.Manifest
 import android.app.Activity
 import android.app.WallpaperManager
+import android.content.Context
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.app.ActivityCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.facebook.shimmer.ShimmerFrameLayout
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -24,12 +28,17 @@ class WallpaperAdapter(
 
 
 ) : RecyclerView.Adapter<WallpaperAdapter.WallpaperViewHolder>() {
+
+
     inner class WallpaperViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageWallpaper: ImageView = itemView.findViewById(R.id.image_view_parallax_effect)
         val backWallpaper: ImageView = itemView.findViewById(R.id.back_wallpaper)
         val nextWallpaper: ImageView = itemView.findViewById(R.id.next_wallpaper)
         val setWallpaper: ImageView = itemView.findViewById(R.id.set_wallpaper)
+        val shimmerLayer: ShimmerFrameLayout = itemView.findViewById(R.id.shimmer_view_container)
+        val shareApp: ImageView = itemView.findViewById(R.id.share_app)
     }
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -41,8 +50,16 @@ class WallpaperAdapter(
         )
     }
 
+
     override fun onBindViewHolder(holder: WallpaperViewHolder, position: Int) {
+
+        holder.shimmerLayer.setShimmer(shimmerSetup().build())
+
         val currentWallpaperItem = wallpaperItems[position]
+        Glide.with(holder.imageWallpaper.context)
+            .load(Uri.parse(currentWallpaperItem.wallpaperFileName))
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(holder.imageWallpaper)
 
         holder.backWallpaper.setOnClickListener(View.OnClickListener {
             var viewPager =
@@ -63,10 +80,10 @@ class WallpaperAdapter(
                 setWallpaper(it, holder.imageWallpaper.drawable.toBitmap())
             }
         })
-        Glide.with(holder.imageWallpaper.context)
-            .load(Uri.parse(currentWallpaperItem.wallpaperFileName))
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(holder.imageWallpaper)
+
+        holder.shareApp.setOnClickListener(View.OnClickListener {
+            shareApp(it.context)
+        })
     }
 
     private fun setWallpaper(view: View, bitmap: Bitmap) {
@@ -74,8 +91,23 @@ class WallpaperAdapter(
         val wallpaperManager =
             WallpaperManager.getInstance(view.context.applicationContext)
         wallpaperManager.setBitmap(bitmap)
-        Log.d("SET_WALLPAPER", "WALLPAPER SETTED")
+    }
 
+
+    private fun shareApp(context: Context) = when (PackageManager.PERMISSION_GRANTED) {
+        ActivityCompat.checkSelfPermission(
+            context,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        ) -> {
+            ShareIt(context)
+        }
+        else -> {
+            ActivityCompat.requestPermissions(
+                context as Activity,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                PERMISSION_WRITE_EXTERNAL_STORAGE
+            )
+        }
     }
 
 
