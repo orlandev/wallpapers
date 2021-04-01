@@ -7,4 +7,6 @@
     <string name="app_developer">Orlando Novas Rodriguez</string>
     <string name="open_source">OpenSource</string>
     <string name="github_url">https://github.com/Qu35t64</string>
+    <string name="unsplash">Fotos Unsplash.com</string>
+    <string name="buyme_coffee">Comprame un Café</string>
 </resources>
