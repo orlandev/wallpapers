@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.ondev.wallpapers.databinding.FragmentAboutBinding
 
-class About : Fragment() {
+class AboutFragment : Fragment() {
 
     lateinit var binding: FragmentAboutBinding
     override fun onCreateView(
@@ -16,6 +17,10 @@ class About : Fragment() {
     ): View? {
 
         FragmentAboutBinding.inflate(inflater, container, false).let { binding = it }
+
+        binding.closeAbout.setOnClickListener(View.OnClickListener {
+            findNavController().navigate(R.id.action_about_to_wallpaperFragment)
+        })
 
         binding.appDeveloper.setOnClickListener(View.OnClickListener {
             openUri(

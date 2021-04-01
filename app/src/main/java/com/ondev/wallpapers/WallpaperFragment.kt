@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.ondev.wallpapers.databinding.FragmentWallpaperViewpagerBinding
 import java.io.IOException
 
@@ -19,6 +20,10 @@ class WallpaperFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         FragmentWallpaperViewpagerBinding.inflate(inflater, container, false).also { binding = it }
+
+        binding.aboutApp.setOnClickListener(View.OnClickListener {
+            findNavController().navigate(R.id.action_wallpaperFragment_to_about)
+        })
 
         var wallpaperItems = mutableListOf<WallpaperItem>()
 

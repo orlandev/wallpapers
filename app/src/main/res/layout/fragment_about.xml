@@ -6,13 +6,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".About">
+        tools:context=".AboutFragment">
 
         <ImageView
             android:id="@+id/app_logo"
             android:layout_width="110dp"
             android:layout_height="100dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="64dp"
             android:src="@drawable/share_app"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -95,13 +95,13 @@
             app:layout_constraintVertical_bias="0.102" />
 
         <ImageView
-            android:id="@+id/qr_transfer"
-            android:layout_width="110dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="50dp"
-            android:src="@drawable/share_app"
+            android:id="@+id/close_about"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="32dp"
+            android:src="@drawable/ic_baseline_close_24"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
