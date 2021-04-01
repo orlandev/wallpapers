@@ -11,12 +11,23 @@
         <ImageView
             android:id="@+id/app_logo"
             android:layout_width="110dp"
-            android:layout_height="100dp"
+            android:layout_height="110dp"
             android:layout_marginTop="64dp"
             android:src="@drawable/share_app"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/app_logo2"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+
+            android:src="@drawable/qrcode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buymeacoffe" />
 
         <TextView
             android:id="@+id/app_name"
@@ -89,10 +100,20 @@
             android:text="@string/buyme_coffee"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/developer_github"
             app:layout_constraintVertical_bias="0.102" />
+
+        <TextView
+            android:id="@+id/transfermobil"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="@string/transfer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_logo2" />
 
         <ImageView
             android:id="@+id/close_about"
