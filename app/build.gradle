@@ -12,11 +12,11 @@ android {
         dataBinding true
     }
     defaultConfig {
-        applicationId "com.ondev.wallpapers"
+        applicationId "com.ondev.wallpaper"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.1.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

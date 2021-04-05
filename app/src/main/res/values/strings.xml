@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Wallpapers</string>
-    <string name="app_share_text">"Mira estos fondos de pantalla que buenos están. descarga la app desde https://apklist/Qu35t64/com.ondev.wallpapers"</string>
+    <string name="app_name">Fondos de Pantalla</string>
+    <string name="app_share_text">"Mira estos fondos de pantalla que buenos están. descarga la app desde https://www.apklis.cu/application/com.ondev.wallpapers"</string>
     <string name="share_by">Elija por donde desea compartir</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -9,5 +9,9 @@
     <string name="github_url">https://github.com/Qu35t64</string>
     <string name="unsplash">Fotos Unsplash.com</string>
     <string name="buyme_coffee">Comprame un Café</string>
-    <string name="transfer">Usa Transfemovil</string>
+    <string name="transfer">Usa Transfermovil</string>
+    <string name="set_wallpaper_tooltip">Establecer como fondo de pantalla</string>
+    <string name="back_button_tooltip">Fondo anterior</string>
+    <string name="share_app_tooltip">Compartir</string>
+    <string name="next_wallpaper_tooltip">Fondo siguiente</string>
 </resources>
