@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Wallpapers)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         window.apply {
