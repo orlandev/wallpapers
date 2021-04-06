@@ -10,8 +10,8 @@ import com.facebook.shimmer.Shimmer
 
 fun shimmerSetup(): Shimmer.AlphaHighlightBuilder {
     val shimmerBuilder = Shimmer.AlphaHighlightBuilder()
-    shimmerBuilder.setDuration(3000L).setRepeatMode(ValueAnimator.INFINITE)
-    shimmerBuilder.setBaseAlpha(0.6f)
+    shimmerBuilder.setDuration(2000L).setRepeatMode(ValueAnimator.INFINITE)
+    shimmerBuilder.setBaseAlpha(0.7f)
     return shimmerBuilder
 }
 
