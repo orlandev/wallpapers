@@ -10,7 +10,9 @@
         android:label="WallpaperFragment" >
         <action
             android:id="@+id/action_wallpaperFragment_to_about"
-            app:destination="@id/about" />
+            app:destination="@id/about"
+            app:enterAnim="@anim/splash_transition_in"
+            app:exitAnim="@anim/splash_transition_out" />
     </fragment>
     <fragment
         android:id="@+id/about"
@@ -18,6 +20,8 @@
         android:label="About" >
         <action
             android:id="@+id/action_about_to_wallpaperFragment"
-            app:destination="@id/wallpaperFragment" />
+            app:destination="@id/wallpaperFragment"
+            app:enterAnim="@anim/splash_transition_in"
+            app:exitAnim="@anim/splash_transition_out" />
     </fragment>
 </navigation>

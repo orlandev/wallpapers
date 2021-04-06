@@ -4,7 +4,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/black">
 
         <ImageView
             android:id="@+id/image_view_parallax_effect"
@@ -20,11 +21,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:shimmer_duration="1000">
+            app:shimmer_duration="800">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -32,10 +34,10 @@
                     android:id="@+id/back_wallpaper"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginBottom="32dp"
+
                     android:clickable="true"
-                    android:tooltipText="@string/back_button_tooltip"
                     android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                    android:tooltipText="@string/back_button_tooltip"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/share_app"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -70,8 +72,8 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:clickable="true"
-                    android:tooltipText="@string/next_wallpaper_tooltip"
                     android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                    android:tooltipText="@string/next_wallpaper_tooltip"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/set_wallpaper"
