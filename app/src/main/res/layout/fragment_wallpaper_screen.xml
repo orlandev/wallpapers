@@ -7,78 +7,123 @@
         android:layout_height="match_parent"
         android:background="@color/black">
 
+
         <ImageView
             android:id="@+id/image_view_parallax_effect"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
 
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmer_view_container"
-            android:layout_width="0dp"
+
+        <ImageView
+            android:id="@+id/about_app"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="32dp"
+            android:src="@drawable/ic_baseline_live_help_24"
+            app:layout_constraintBottom_toTopOf="@+id/photo_count"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/photo_count"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:shadowColor="#000000"
+            android:shadowDx="0.0"
+            android:shadowDy="0.0"
+            android:shadowRadius="2.0"
+            android:text="34 / 100"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+
+            app:layout_constraintBottom_toTopOf="@+id/materialCardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#11000000"
+            app:cardCornerRadius="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:shimmer_duration="800">
+            app:layout_constraintStart_toStartOf="@+id/image_view_parallax_effect">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_gravity="center"
+                app:shimmer_duration="800">
 
-                <ImageView
-                    android:id="@+id/back_wallpaper"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                    android:clickable="true"
-                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
-                    android:tooltipText="@string/back_button_tooltip"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/share_app"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    <ImageView
+                        android:id="@+id/back_wallpaper"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:clickable="true"
+                        android:src="@drawable/ic_baseline_arrow_back_ios_24"
+                        android:tooltipText="@string/back_button_tooltip"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/share_app"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/share_app"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:clickable="true"
-                    android:src="@drawable/ic_baseline_share_24"
-                    android:tooltipText="@string/share_app_tooltip"
-                    app:layout_constraintEnd_toStartOf="@+id/set_wallpaper"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/back_wallpaper"
-                    app:layout_constraintTop_toTopOf="@+id/back_wallpaper" />
+                    <ImageView
+                        android:id="@+id/share_app"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:clickable="true"
+                        android:src="@drawable/ic_baseline_share_24"
+                        android:tooltipText="@string/share_app_tooltip"
+                        app:layout_constraintBottom_toBottomOf="@+id/back_wallpaper"
+                        app:layout_constraintEnd_toStartOf="@+id/set_wallpaper"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/back_wallpaper"
+                        app:layout_constraintTop_toTopOf="@+id/back_wallpaper" />
 
-                <ImageView
-                    android:id="@+id/set_wallpaper"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:clickable="true"
-                    android:src="@drawable/ic_baseline_wallpaper_24"
-                    android:tooltipText="@string/set_wallpaper_tooltip"
-                    app:layout_constraintEnd_toStartOf="@+id/next_wallpaper"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/share_app"
-                    app:layout_constraintTop_toTopOf="@+id/share_app" />
+                    <ImageView
+                        android:id="@+id/set_wallpaper"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:clickable="true"
+                        android:src="@drawable/ic_baseline_wallpaper_24"
+                        android:tooltipText="@string/set_wallpaper_tooltip"
+                        app:layout_constraintBottom_toBottomOf="@+id/share_app"
+                        app:layout_constraintEnd_toStartOf="@+id/next_wallpaper"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/share_app"
+                        app:layout_constraintTop_toTopOf="@+id/share_app" />
 
-                <ImageView
-                    android:id="@+id/next_wallpaper"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:clickable="true"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:tooltipText="@string/next_wallpaper_tooltip"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/set_wallpaper"
-                    app:layout_constraintTop_toTopOf="@+id/set_wallpaper" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.facebook.shimmer.ShimmerFrameLayout>
+                    <ImageView
+                        android:id="@+id/next_wallpaper"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:clickable="true"
+                        android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+                        android:tooltipText="@string/next_wallpaper_tooltip"
+                        app:layout_constraintBottom_toBottomOf="@+id/set_wallpaper"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/set_wallpaper"
+                        app:layout_constraintTop_toTopOf="@+id/set_wallpaper" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+        </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

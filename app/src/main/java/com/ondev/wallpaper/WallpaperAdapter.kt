@@ -12,9 +12,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -39,6 +41,8 @@ class WallpaperAdapter(
         val setWallpaper: ImageView = itemView.findViewById(R.id.set_wallpaper)
         val shimmerLayer: ShimmerFrameLayout = itemView.findViewById(R.id.shimmer_view_container)
         val shareApp: ImageView = itemView.findViewById(R.id.share_app)
+        val showPhotoCount: TextView = itemView.findViewById(R.id.photo_count)
+        val aboutBtn: ImageView = itemView.findViewById(R.id.about_app)
     }
 
 
@@ -46,9 +50,10 @@ class WallpaperAdapter(
         parent: ViewGroup,
         viewType: Int
     ): WallpaperViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.fragment_wallpaper_screen, parent, false)
         return WallpaperViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_wallpaper_screen, parent, false)
+            view
         )
     }
 
@@ -57,6 +62,10 @@ class WallpaperAdapter(
 
         holder.shimmerLayer.setShimmer(shimmerSetup().build())
 
+        holder.showPhotoCount.text = "${position + 1} / ${wallpaperItems.size}"
+        holder.aboutBtn.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_wallpaperFragment_to_about)
+        }
         val currentWallpaperItem = wallpaperItems[position]
         Glide.with(holder.imageWallpaper.context)
             .load(Uri.parse(currentWallpaperItem.wallpaperFileName))

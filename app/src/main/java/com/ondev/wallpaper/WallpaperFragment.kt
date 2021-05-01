@@ -20,9 +20,6 @@ class WallpaperFragment : Fragment() {
     ): View {
         FragmentWallpaperViewpagerBinding.inflate(inflater, container, false).also { binding = it }
 
-        binding.aboutApp.setOnClickListener(View.OnClickListener {
-            findNavController().navigate(R.id.action_wallpaperFragment_to_about)
-        })
 
         var wallpaperItems = mutableListOf<WallpaperItem>()
 
