@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ondev.wallpaper">
+    package="com.ondev.wallpaperpro">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wallpapers">
         <activity
-            android:name="com.ondev.wallpaper.MainActivity"
+            android:name="com.ondev.wallpaperpro.MainActivity"
             android:theme="@style/SplashScreen">
 
             <intent-filter>

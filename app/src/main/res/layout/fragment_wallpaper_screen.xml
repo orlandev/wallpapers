@@ -14,7 +14,6 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
 
-
         <ImageView
             android:id="@+id/about_app"
             android:layout_width="32dp"
@@ -24,7 +23,7 @@
             app:layout_constraintBottom_toTopOf="@+id/photo_count"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
+   <TextView
             android:id="@+id/photo_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,10 +35,26 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textStyle="bold"
-
             app:layout_constraintBottom_toTopOf="@+id/materialCardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/photo_owner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="64dp"
+            android:shadowColor="#000000"
+            android:shadowDx="0.0"
+            android:shadowDy="0.0"
+            android:shadowRadius="2.0"
+            android:text="Pedro quintana from Unsplash.com"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/image_view_parallax_effect" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"

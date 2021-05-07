@@ -1,11 +1,18 @@
-package com.ondev.wallpaper
+package com.ondev.wallpaperpro
 
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.unsplash.pickerandroid.photopicker.UnsplashPhotoPicker
+import com.unsplash.pickerandroid.photopicker.data.UnsplashPhoto
+import com.unsplash.pickerandroid.photopicker.presentation.UnsplashPickerActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +26,20 @@ class MainActivity : AppCompatActivity() {
             statusBarColor = Color.TRANSPARENT
         }
 
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        /*if (resultCode == Activity.RESULT_OK && requestCode == UNSPLASH_REQUEST_CODE) {
+            val photos: ArrayList<UnsplashPhoto>? =
+                data?.getParcelableArrayListExtra(UnsplashPickerActivity.EXTRA_PHOTOS)
+            for (i in photos!!) {
+                Log.d("PHOTOS", "onActivityResult: ${i}")
+            }
+        }else{
+            Log.d("PHOTOS", "ERROR")
+        }*/
     }
 
     override fun onRequestPermissionsResult(

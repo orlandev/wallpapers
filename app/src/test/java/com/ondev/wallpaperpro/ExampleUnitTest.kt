@@ -1,4 +1,4 @@
-package com.ondev.wallpaper
+package com.ondev.wallpaperpro
 
 import org.junit.Test
 

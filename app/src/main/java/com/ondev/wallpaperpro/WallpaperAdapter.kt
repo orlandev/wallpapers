@@ -1,4 +1,4 @@
-package com.ondev.wallpaper
+package com.ondev.wallpaperpro
 
 import android.Manifest
 import android.app.Activity
@@ -43,6 +43,7 @@ class WallpaperAdapter(
         val shareApp: ImageView = itemView.findViewById(R.id.share_app)
         val showPhotoCount: TextView = itemView.findViewById(R.id.photo_count)
         val aboutBtn: ImageView = itemView.findViewById(R.id.about_app)
+        val photoOwner: TextView = itemView.findViewById(R.id.photo_owner)
     }
 
 
@@ -59,16 +60,19 @@ class WallpaperAdapter(
 
 
     override fun onBindViewHolder(holder: WallpaperViewHolder, position: Int) {
+        val currentWallpaperItem = wallpaperItems[position]
 
         holder.shimmerLayer.setShimmer(shimmerSetup().build())
-
+        holder.photoOwner.text = currentWallpaperItem.wallpaperOwner
         holder.showPhotoCount.text = "${position + 1} / ${wallpaperItems.size}"
         holder.aboutBtn.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_wallpaperFragment_to_about)
         }
-        val currentWallpaperItem = wallpaperItems[position]
+
         Glide.with(holder.imageWallpaper.context)
             .load(Uri.parse(currentWallpaperItem.wallpaperFileName))
+            .placeholder(R.drawable.download)
+            .centerCrop()
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(holder.imageWallpaper)
 
@@ -107,11 +111,9 @@ class WallpaperAdapter(
     }
 
     private fun setWallpaper(view: View, bitmap: Bitmap) {
-
         val wallpaperManager =
             WallpaperManager.getInstance(view.context.applicationContext)
         wallpaperManager.setBitmap(bitmap)
-
     }
 
 
