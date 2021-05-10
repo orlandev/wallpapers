@@ -1,4 +1,4 @@
-package com.ondev.wallpaperpro
+package com.ondev.wallpaper
 
 import android.Manifest
 import android.app.Activity

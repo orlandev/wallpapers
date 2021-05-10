@@ -1,4 +1,4 @@
-package com.ondev.wallpaperpro
+package com.ondev.wallpaper
 
 import android.animation.ValueAnimator
 import android.content.Context

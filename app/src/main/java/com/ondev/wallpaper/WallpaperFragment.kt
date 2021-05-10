@@ -1,4 +1,4 @@
-package com.ondev.wallpaperpro
+package com.ondev.wallpaper
 
 import android.app.Activity
 import android.content.Intent
@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ondev.wallpaperpro.databinding.FragmentWallpaperViewpagerBinding
+import com.ondev.wallpaper.databinding.FragmentWallpaperViewpagerBinding
 import com.unsplash.pickerandroid.photopicker.UnsplashPhotoPicker
 import com.unsplash.pickerandroid.photopicker.data.UnsplashPhoto
 import com.unsplash.pickerandroid.photopicker.presentation.UnsplashPickerActivity

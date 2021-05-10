@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "662242911307",
+    "project_id": "apklisapps",
+    "storage_bucket": "apklisapps.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662242911307:android:25010777c925faff5c59ce",
+        "android_client_info": {
+          "package_name": "com.ondev.wallpaper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "662242911307-oqgiv54vmffbcp7re9dc9np42rt6s1tq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ondev.wallpaper",
+            "certificate_hash": "4a77ab417b45f07d4181353bf96996557809b81a"
+          }
+        },
+        {
+          "client_id": "662242911307-qrlpe76n0pj03j657cutjqbhng6on545.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM3Dn_Zh1MZPEmCxnIELFt8t0-E7NEgM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "662242911307-qrlpe76n0pj03j657cutjqbhng6on545.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

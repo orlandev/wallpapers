@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/wallpaperFragment"
-        android:name="com.ondev.wallpaperpro.WallpaperFragment"
+        android:name="com.ondev.wallpaper.WallpaperFragment"
         android:label="WallpaperFragment" >
         <action
             android:id="@+id/action_wallpaperFragment_to_about"
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/about"
-        android:name="com.ondev.wallpaperpro.AboutFragment"
+        android:name="com.ondev.wallpaper.AboutFragment"
         android:label="About" >
         <action
             android:id="@+id/action_about_to_wallpaperFragment"

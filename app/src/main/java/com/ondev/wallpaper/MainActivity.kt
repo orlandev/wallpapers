@@ -1,18 +1,12 @@
-package com.ondev.wallpaperpro
+package com.ondev.wallpaper
 
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.unsplash.pickerandroid.photopicker.UnsplashPhotoPicker
-import com.unsplash.pickerandroid.photopicker.data.UnsplashPhoto
-import com.unsplash.pickerandroid.photopicker.presentation.UnsplashPickerActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

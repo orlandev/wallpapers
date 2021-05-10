@@ -1,4 +1,4 @@
-package com.ondev.wallpaperpro
+package com.ondev.wallpaper
 
 import android.view.View
 import android.widget.ImageView
