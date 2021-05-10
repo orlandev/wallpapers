@@ -20,6 +20,4 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="51dp" />
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

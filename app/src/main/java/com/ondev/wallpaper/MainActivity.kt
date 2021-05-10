@@ -1,6 +1,5 @@
 package com.ondev.wallpaper
 
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
@@ -21,19 +20,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        /*if (resultCode == Activity.RESULT_OK && requestCode == UNSPLASH_REQUEST_CODE) {
-            val photos: ArrayList<UnsplashPhoto>? =
-                data?.getParcelableArrayListExtra(UnsplashPickerActivity.EXTRA_PHOTOS)
-            for (i in photos!!) {
-                Log.d("PHOTOS", "onActivityResult: ${i}")
-            }
-        }else{
-            Log.d("PHOTOS", "ERROR")
-        }*/
     }
 
     override fun onRequestPermissionsResult(

@@ -8,20 +8,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.ondev.wallpaper.databinding.FragmentWallpaperViewpagerBinding
+import com.ondev.wallpaper.preferences.UserPreferencesRepository
 import com.unsplash.pickerandroid.photopicker.UnsplashPhotoPicker
 import com.unsplash.pickerandroid.photopicker.data.UnsplashPhoto
 import com.unsplash.pickerandroid.photopicker.presentation.UnsplashPickerActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.IOException
 
 
 class WallpaperFragment : Fragment() {
     private lateinit var binding: FragmentWallpaperViewpagerBinding
-
+    private lateinit var userPref: UserPreferencesRepository
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        userPref = ((requireContext().applicationContext as MainAplication).userPrefsRepo)
+
         UnsplashPhotoPicker.init(
             this.requireActivity().application, // application
             "awlPMWQ8oTGimCN91aL-M6zyH1EqDH6IHUhMy6Qi0wY",
@@ -47,16 +53,31 @@ class WallpaperFragment : Fragment() {
         )
         binding.viewPageWallpaper.setPageTransformer(WallpaperTransformer())
         binding.download.setOnClickListener {
-            startActivityForResult(
-                UnsplashPickerActivity.getStartingIntent(
-                    requireContext(), // context
-                    isMultipleSelection = true
-                ), UNSPLASH_REQUEST_CODE
-            )
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                if (userPref.getPrefs().userPay) {
+                    startUnsplash()
+                } else {
+                    Log.d("TAG", "onCreateView: USER NOT PAYED then pay")
+                    userPref.updateUserPay(true)
+                }
+            }
+
+
         }
         return binding.root
 
     }
+
+    fun startUnsplash() {
+        startActivityForResult(
+            UnsplashPickerActivity.getStartingIntent(
+                requireContext(), // context
+                isMultipleSelection = true
+            ), UNSPLASH_REQUEST_CODE
+        )
+    }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -77,5 +98,7 @@ class WallpaperFragment : Fragment() {
             Log.d("PHOTOS", "ERROR")
         }
     }
-
 }
+
+
+
