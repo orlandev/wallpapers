@@ -1,4 +1,4 @@
-package com.ondev.wallpaper
+package com.ondev.wallpaper.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.ondev.wallpaper.R
+import com.ondev.wallpaper.utils.TypeUriSocialMedia
 import com.ondev.wallpaper.databinding.FragmentAboutBinding
+import com.ondev.wallpaper.utils.openUri
 
 class AboutFragment : Fragment() {
 

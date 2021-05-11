@@ -1,4 +1,4 @@
-package com.ondev.wallpaper
+package com.ondev.wallpaper.utils
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
 import com.facebook.shimmer.Shimmer
+import com.ondev.wallpaper.R
 
 fun shimmerSetup(): Shimmer.AlphaHighlightBuilder {
     val shimmerBuilder = Shimmer.AlphaHighlightBuilder()

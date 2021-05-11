@@ -3,6 +3,8 @@ package com.ondev.wallpaper
 import android.app.Application
 import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore
+import com.ondev.wallpaper.data.database.WallpapersRepository
+import com.ondev.wallpaper.data.database.WallpapersRoomDatabase
 import com.ondev.wallpaper.preferences.UserPreferencesRepository
 
 class MainAplication : Application() {
@@ -13,6 +15,7 @@ class MainAplication : Application() {
         name = USER_PREFERENCES_NAME
     )
 
+    private val database by lazy { WallpapersRoomDatabase.getDataBase(this) }
     val userPrefsRepo by lazy { UserPreferencesRepository(dataStore) }
-
+    val wallpapersRepository by lazy { WallpapersRepository(database.wallpapersDao()) }
 }

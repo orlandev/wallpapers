@@ -1,4 +1,4 @@
-package com.ondev.wallpaper
+package com.ondev.wallpaper.adapters
 
 import android.Manifest
 import android.app.Activity
@@ -22,6 +22,10 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.ondev.wallpaper.*
+import com.ondev.wallpaper.data.WallpaperItem
+import com.ondev.wallpaper.utils.ShareIt
+import com.ondev.wallpaper.utils.shimmerSetup
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 

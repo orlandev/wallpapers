@@ -2,7 +2,7 @@
 buildscript {
     ext {
         // Sdk and tools
-        buildToolsVersion = '30.0.2'
+        buildToolsVersion = '30.0.3'
         compileSdkVersion = 30
         minSdkVersion = 21
         targetSdkVersion = 30
@@ -25,6 +25,7 @@ buildscript {
         lifecycleVersion = '2.2.0'
         materialVersion = '1.2.1'
         navigationVersion = '2.3.2'
+        roomVersion = '2.2.6'
     }
 
     repositories {

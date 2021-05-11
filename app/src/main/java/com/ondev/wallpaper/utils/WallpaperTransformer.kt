@@ -1,10 +1,11 @@
-package com.ondev.wallpaper
+package com.ondev.wallpaper.utils
 
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.card.MaterialCardView
+import com.ondev.wallpaper.R
 
 
 class WallpaperTransformer : ViewPager2.PageTransformer {

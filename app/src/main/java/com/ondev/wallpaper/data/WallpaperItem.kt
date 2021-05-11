@@ -1,4 +1,4 @@
-package com.ondev.wallpaper
+package com.ondev.wallpaper.data
 
 data class WallpaperItem(
     var wallpaperFileName: String,
