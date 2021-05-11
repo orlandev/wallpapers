@@ -6,4 +6,7 @@
     <string name="transferir">Transferir</string>
     <string name="channel_name">WallpapersNotifications</string>
     <string name="channel_description">Canal para las notificaciones</string>
+    <string name="set_Wallpaper">SI</string>
+    <string name="user_set_wallpaper">Deseas poner esta imagen como  fondo de pantalla.</string>
+    <string name="no">No</string>
 </resources>

@@ -35,7 +35,6 @@ import com.unsplash.pickerandroid.photopicker.presentation.UnsplashPickerActivit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.IOException
 
 
 class WallpaperFragment : Fragment() {
@@ -48,7 +47,6 @@ class WallpaperFragment : Fragment() {
     private val wallpaperViewModel: WallpapersViewModel by viewModels {
         WallpaperViewModelFactory((requireContext().applicationContext as MainAplication).wallpapersRepository)
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,24 +61,21 @@ class WallpaperFragment : Fragment() {
         )
 
         FragmentWallpaperViewpagerBinding.inflate(inflater, container, false).also { binding = it }
-        var wallpaperItems = mutableListOf<WallpaperItem>()
-
         lifecycleScope.launch(Dispatchers.IO) {
-            try {
+            if (!userPref.isFirstIndex()) {
                 val wallpaperFolder = resources.assets.list("wallpapers")
-                if (!wallpaperFolder.isNullOrEmpty()) {
-                    wallpaperFolder.forEach { wallItem ->
-                        wallpaperViewModel.insert(
-                            Wallpaper(
-                                0,
-                                "${ASSETS_FOLDER}wallpapers/$wallItem",
-                                ""
-                            )
+                wallpaperFolder?.forEach { wallItem ->
+                    wallpaperViewModel.insert(
+                        Wallpaper(
+                            0,
+                            "${ASSETS_FOLDER}wallpapers/$wallItem",
+                            ""
                         )
-                    }
+                    )
                 }
-            } catch (e: IOException) {
-                e.printStackTrace()
+                val firstIndex = true
+                userPref.setFirstIndex(firstIndex)
+
             }
         }
         wallpaperViewModel.allWallpapers.observe(viewLifecycleOwner, {

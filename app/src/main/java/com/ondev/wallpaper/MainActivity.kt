@@ -3,10 +3,17 @@ package com.ondev.wallpaper
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.ondev.wallpaper.utils.ShareIt
+import cu.uci.apklisupdate.ApklisUpdate
+import cu.uci.apklisupdate.UpdateCallback
+import cu.uci.apklisupdate.model.AppUpdateInfo
+import cu.uci.apklisupdate.view.ApklisUpdateDialog
+import cu.uci.apklisupdate.view.ApklisUpdateFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +26,43 @@ class MainActivity : AppCompatActivity() {
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
             statusBarColor = Color.TRANSPARENT
         }
+
+        ApklisUpdate.hasAppUpdate(this, callback = object : UpdateCallback {
+            override fun onNewUpdate(appUpdateInfo: AppUpdateInfo) {
+
+                //Start info alert dialog or do what you want.
+                ApklisUpdateDialog(
+                    this@MainActivity,
+                    appUpdateInfo,
+                    ContextCompat.getColor(
+                        this@MainActivity,
+                        R.color.colorAccent
+                    )
+                ).show()
+
+                //Start info fragment or do what you want.
+                supportFragmentManager.beginTransaction().add(
+                    R.id.container, ApklisUpdateFragment.newInstance(
+                        updateInfo = appUpdateInfo,
+                        actionsColor = ContextCompat.getColor(
+                            this@MainActivity,
+                            R.color.colorAccent
+                        )
+                    )
+                ).commit()
+
+            }
+
+            override fun onOldUpdate(appUpdateInfo: AppUpdateInfo) {
+                Log.d("MainActivity", "onOldUpdate $appUpdateInfo")
+            }
+
+            override fun onError(e: Throwable) {
+                e.printStackTrace()
+            }
+        })
     }
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

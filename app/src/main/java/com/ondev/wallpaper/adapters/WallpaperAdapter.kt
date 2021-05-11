@@ -2,10 +2,10 @@ package com.ondev.wallpaper.adapters
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.WallpaperManager
 import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -92,18 +92,8 @@ class WallpaperAdapter(
                 viewPager.setCurrentItem(viewPager.currentItem + 1, true)
         })
 
-        holder.setWallpaper.setOnClickListener(View.OnClickListener {
-            GlobalScope.launch {
-                setWallpaper(it, holder.imageWallpaper.drawable.toBitmap())
-            }
-            var toast =
-                Toast.makeText(
-                    it.context,
-                    "Se ha cambiado el fondo de pantalla.",
-                    Toast.LENGTH_SHORT
-                )
-            toast.setGravity(Gravity.CENTER, 0, 0)
-            toast.show()
+        holder.setWallpaper.setOnClickListener(View.OnClickListener { view ->
+            showAlertDialogSetWallpaper(holder, view)
 
         })
 
@@ -112,10 +102,35 @@ class WallpaperAdapter(
         })
     }
 
-    private fun setWallpaper(view: View, bitmap: Bitmap) {
-        val wallpaperManager =
-            WallpaperManager.getInstance(view.context.applicationContext)
-        wallpaperManager.setBitmap(bitmap)
+
+    private fun showAlertDialogSetWallpaper(holder: WallpaperViewHolder, view: View) {
+        val builder = AlertDialog.Builder(view.context)
+        builder.setTitle("Fondos de Pantalla")
+        builder.setMessage(R.string.user_set_wallpaper)
+        builder.setIcon(R.drawable.icon_splash_screen)
+        builder.setPositiveButton(
+            R.string.set_Wallpaper
+        ) { dialog, _ ->
+            dialog.dismiss()
+            GlobalScope.launch {
+                val wallpaperManager =
+                    WallpaperManager.getInstance(view.context.applicationContext)
+                wallpaperManager.setBitmap(holder.imageWallpaper.drawable.toBitmap())
+            }
+            var toast =
+                Toast.makeText(
+                    view.context,
+                    "Se ha cambiado el fondo de pantalla.",
+                    Toast.LENGTH_SHORT
+                )
+            toast.setGravity(Gravity.CENTER, 0, 0)
+            toast.show()
+        }
+        builder.setNegativeButton(
+            R.string.no
+        ) { dialog, _ -> dialog.cancel() }
+
+        builder.show()
     }
 
 
