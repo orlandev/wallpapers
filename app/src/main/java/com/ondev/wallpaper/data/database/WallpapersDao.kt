@@ -6,7 +6,7 @@ import androidx.room.*
 @Dao
 interface WallpapersDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(wallpaper: Wallpaper)
 
     @Update
@@ -15,10 +15,10 @@ interface WallpapersDao {
     @Query("SELECT * FROM wallpapers")
     fun getWallpapers(): LiveData<List<Wallpaper>>
 
-    @Query(value = "DELETE FROM wallpapers")
+    @Query("DELETE FROM wallpapers")
     suspend fun deleteAll()
 
-    @Query(value = "DELETE FROM wallpapers where id = :id")
+    @Query("DELETE FROM wallpapers WHERE id = :id")
     suspend fun deleteByID(id: Int)
 
 }

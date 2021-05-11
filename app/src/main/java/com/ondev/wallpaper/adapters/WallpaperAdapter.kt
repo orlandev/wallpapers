@@ -22,8 +22,9 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.ondev.wallpaper.*
-import com.ondev.wallpaper.data.WallpaperItem
+import com.ondev.wallpaper.PERMISSION_WRITE_EXTERNAL_STORAGE
+import com.ondev.wallpaper.R
+import com.ondev.wallpaper.data.database.Wallpaper
 import com.ondev.wallpaper.utils.ShareIt
 import com.ondev.wallpaper.utils.shimmerSetup
 import kotlinx.coroutines.GlobalScope
@@ -31,13 +32,8 @@ import kotlinx.coroutines.launch
 
 
 class WallpaperAdapter(
-
-    private var wallpaperItems: List<WallpaperItem>
-
-
+    private var wallpaperItems: List<Wallpaper>
 ) : RecyclerView.Adapter<WallpaperAdapter.WallpaperViewHolder>() {
-
-
     inner class WallpaperViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageWallpaper: ImageView = itemView.findViewById(R.id.image_view_parallax_effect)
         val backWallpaper: ImageView = itemView.findViewById(R.id.back_wallpaper)
@@ -49,7 +45,6 @@ class WallpaperAdapter(
         val aboutBtn: ImageView = itemView.findViewById(R.id.about_app)
         val photoOwner: TextView = itemView.findViewById(R.id.photo_owner)
     }
-
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -65,16 +60,19 @@ class WallpaperAdapter(
 
     override fun onBindViewHolder(holder: WallpaperViewHolder, position: Int) {
         val currentWallpaperItem = wallpaperItems[position]
-
         holder.shimmerLayer.setShimmer(shimmerSetup().build())
-        holder.photoOwner.text = currentWallpaperItem.wallpaperOwner
+        if (!currentWallpaperItem.Owner.isNullOrEmpty()) {
+            holder.photoOwner.text = "Fotógrafo ${currentWallpaperItem.Owner}"
+        } else {
+            holder.photoOwner.visibility = View.INVISIBLE
+        }
         holder.showPhotoCount.text = "${position + 1} / ${wallpaperItems.size}"
         holder.aboutBtn.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_wallpaperFragment_to_about)
         }
 
         Glide.with(holder.imageWallpaper.context)
-            .load(Uri.parse(currentWallpaperItem.wallpaperFileName))
+            .load(Uri.parse(currentWallpaperItem.Url))
             .placeholder(R.drawable.download)
             .centerCrop()
             .transition(DrawableTransitionOptions.withCrossFade())

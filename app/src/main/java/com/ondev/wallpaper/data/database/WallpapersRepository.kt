@@ -10,6 +10,10 @@ class WallpapersRepository(private val wallpapersDao: WallpapersDao) {
     val allWallpapers: LiveData<List<Wallpaper>> = wallpapersDao.getWallpapers()
 
     suspend fun insert(wallpaper: Wallpaper) = wallpapersDao.insert(wallpaper)
-    suspend fun update(wallpaper: Wallpaper) = wallpapersDao.update(wallpaper)
-    suspend fun deleteByID(id: Int) = wallpapersDao.deleteByID(id)
+    suspend fun update(wallpaper: Wallpaper) {
+        wallpapersDao.update(wallpaper)
+    }
+    suspend fun deleteByID(id: Int) {
+        wallpapersDao.deleteByID(id)
+    }
 }
