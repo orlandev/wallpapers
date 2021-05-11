@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="80dp"
             android:shadowColor="#000000"
             android:shadowDx="0.0"
             android:shadowDy="0.0"
@@ -52,6 +52,7 @@
             android:text="Pedro quintana from Unsplash.com"
             android:textAlignment="center"
             android:textColor="@color/white"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/image_view_parallax_effect" />
