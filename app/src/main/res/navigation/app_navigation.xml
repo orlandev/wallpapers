@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/app_navigation"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
     app:startDestination="@id/wallpaperFragment">
 
 
@@ -11,6 +13,11 @@
         <action
             android:id="@+id/action_wallpaperFragment_to_about"
             app:destination="@id/about"
+            app:enterAnim="@anim/viewpage_transition_in"
+            app:exitAnim="@anim/viewpage_transition_out" />
+        <action
+            android:id="@+id/action_wallpaperFragment_to_imagePickerFragment"
+            app:destination="@id/imagePickerFragment"
             app:enterAnim="@anim/viewpage_transition_in"
             app:exitAnim="@anim/viewpage_transition_out" />
     </fragment>
@@ -24,4 +31,9 @@
             app:enterAnim="@anim/viewpage_transition_in"
             app:exitAnim="@anim/viewpage_transition_out" />
     </fragment>
+    <fragment
+        android:id="@+id/imagePickerFragment"
+        android:name="com.ondev.wallpaper.fragments.ImagePickerFragment"
+        android:label="image_picker_fragment"
+        tools:layout="@layout/image_picker_fragment" />
 </navigation>

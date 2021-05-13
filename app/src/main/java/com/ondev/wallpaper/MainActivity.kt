@@ -8,6 +8,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.ondev.wallpaper.utils.PERMISSION_WRITE_EXTERNAL_STORAGE
 import com.ondev.wallpaper.utils.ShareIt
 import cu.uci.apklisupdate.ApklisUpdate
 import cu.uci.apklisupdate.UpdateCallback
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                     appUpdateInfo,
                     ContextCompat.getColor(
                         this@MainActivity,
-                        R.color.colorAccent
+                        R.color.purple_700
                     )
                 ).show()
 
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                         updateInfo = appUpdateInfo,
                         actionsColor = ContextCompat.getColor(
                             this@MainActivity,
-                            R.color.colorAccent
+                            R.color.purple_700
                         )
                     )
                 ).commit()

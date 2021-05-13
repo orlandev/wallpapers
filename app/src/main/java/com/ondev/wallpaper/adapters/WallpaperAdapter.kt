@@ -22,7 +22,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.ondev.wallpaper.PERMISSION_WRITE_EXTERNAL_STORAGE
+import com.ondev.wallpaper.utils.PERMISSION_WRITE_EXTERNAL_STORAGE
 import com.ondev.wallpaper.R
 import com.ondev.wallpaper.data.database.Wallpaper
 import com.ondev.wallpaper.utils.ShareIt

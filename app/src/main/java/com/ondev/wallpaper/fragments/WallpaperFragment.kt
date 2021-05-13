@@ -1,7 +1,6 @@
 package com.ondev.wallpaper.fragments
 
 import android.Manifest
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -17,21 +16,18 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.ondev.wallpaper.ASSETS_FOLDER
+import androidx.navigation.fragment.findNavController
+import com.ondev.wallpaper.utils.ASSETS_FOLDER
+import com.ondev.wallpaper.BuildConfig
 import com.ondev.wallpaper.MainAplication
 import com.ondev.wallpaper.R
-import com.ondev.wallpaper.UNSPLASH_REQUEST_CODE
 import com.ondev.wallpaper.adapters.WallpaperAdapter
-import com.ondev.wallpaper.data.WallpaperItem
 import com.ondev.wallpaper.data.database.Wallpaper
 import com.ondev.wallpaper.databinding.FragmentWallpaperViewpagerBinding
 import com.ondev.wallpaper.preferences.UserPreferencesRepository
 import com.ondev.wallpaper.utils.WallpaperTransformer
 import com.ondev.wallpaper.viewmodels.WallpaperViewModelFactory
 import com.ondev.wallpaper.viewmodels.WallpapersViewModel
-import com.unsplash.pickerandroid.photopicker.UnsplashPhotoPicker
-import com.unsplash.pickerandroid.photopicker.data.UnsplashPhoto
-import com.unsplash.pickerandroid.photopicker.presentation.UnsplashPickerActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -53,13 +49,6 @@ class WallpaperFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         userPref = ((requireContext().applicationContext as MainAplication).userPrefsRepo)
-        UnsplashPhotoPicker.init(
-            this.requireActivity().application, // application
-            "awlPMWQ8oTGimCN91aL-M6zyH1EqDH6IHUhMy6Qi0wY",
-            "rpVeEdKML23HUaqlIbr4dnlSoZhFnG6aE6iXVTb2iZU"
-            /* optional page size */
-        )
-
         FragmentWallpaperViewpagerBinding.inflate(inflater, container, false).also { binding = it }
         lifecycleScope.launch(Dispatchers.IO) {
             if (!userPref.isFirstIndex()) {
@@ -88,9 +77,9 @@ class WallpaperFragment : Fragment() {
         binding.viewPageWallpaper.setPageTransformer(WallpaperTransformer())
         binding.download.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
-                if (userPref.getPrefs().userPay) {
+                if (BuildConfig.DEBUG || userPref.getPrefs().userPay) {
                     Log.d("TAG", "onCreateView: ENTRANDO!!!")
-                    startUnsplash()
+                    withContext(Dispatchers.Main) { startPixabay() }
                 } else {
                     withContext(Dispatchers.Main) {
                         if (ContextCompat.checkSelfPermission(
@@ -177,14 +166,8 @@ class WallpaperFragment : Fragment() {
         builder.show()
     }
 
-    private fun startUnsplash() {
-
-        startActivityForResult(
-            UnsplashPickerActivity.getStartingIntent(
-                requireContext().applicationContext, // context
-                isMultipleSelection = true
-            ), UNSPLASH_REQUEST_CODE
-        )
+    private fun startPixabay() {
+        findNavController().navigate(R.id.action_wallpaperFragment_to_imagePickerFragment)
     }
 
     private fun transferSaldo() {
@@ -192,30 +175,6 @@ class WallpaperFragment : Fragment() {
             var urltransfer = "*234*1*54074127*$USER_TRANSFER_KEY*10${Uri.encode("#")}"
             val callIntent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$urltransfer"))
             requireContext().startActivity(callIntent)
-        }
-    }
-
-    override fun onActivityResult(
-        requestCode: Int, resultCode: Int, data: Intent?
-    ) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == UNSPLASH_REQUEST_CODE) {
-            val photos: ArrayList<UnsplashPhoto>? =
-                data?.getParcelableArrayListExtra(UnsplashPickerActivity.EXTRA_PHOTOS)
-            var newPhotos = mutableListOf<WallpaperItem>()
-            lifecycleScope.launch(Dispatchers.IO) {
-                for (photo in photos!!) {
-                    wallpaperViewModel.insert(Wallpaper(0, photo.urls.small, photo.user.name))
-                    /*newPhotos.add(
-                        WallpaperItem(
-                            photo.urls.small,
-                            "Fotógrafo ${photo.user.name} en Unsplash.com"
-                        )
-                    )*/
-                }
-            }
-        } else {
-            Log.d("PHOTOS", "ERROR")
         }
     }
 }
