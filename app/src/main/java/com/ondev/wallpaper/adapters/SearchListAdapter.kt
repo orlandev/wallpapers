@@ -50,12 +50,12 @@ class SearchListAdapter(
         holder.imageLikes.text = iLikes.toString()
         holder.userName.text = userName
 
+
         Log.d("SARCHING", "onBindViewHolder: RealURL = $webFormatUrl ")
 
         Glide.with(holder.itemView.context)
             .load(webFormatUrl)
             .placeholder(R.drawable.download)
-            .centerCrop()
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(holder.imageWallpaper)
 

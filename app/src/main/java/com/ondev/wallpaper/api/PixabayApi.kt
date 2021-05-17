@@ -9,6 +9,10 @@ interface PixabayApi {
     suspend fun searchWallpapers(
         @Query("key") apiKey: String,
         @Query("q", encoded = true) userSearch: String,
-        @Query("image_type") imageType: String = "photo"
+        @Query("image_type") imageType: String = "photo",
+        @Query("pretty") pretty: Boolean = true,
+        @Query("orientation") orientation: String = "horizontal",
+        @Query("per_page") per_page: Int = 100,
+        @Query("safesearch") safesearch: Boolean = true,
     ): PixabayJson
 }

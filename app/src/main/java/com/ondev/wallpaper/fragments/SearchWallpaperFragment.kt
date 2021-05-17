@@ -21,12 +21,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.math.log
+import kotlin.random.Random
 
 class SearchWallpaperFragment : Fragment() {
 
     lateinit var binding: FragmentSearchWallpaperBinding
     lateinit var listAdapter: SearchListAdapter
     lateinit var recycleImagesList: RecyclerView
+
+    val randomSearch =
+        "backgrounds, fashion, nature, science, education, feelings, health, people, religion, places, animals, industry, computer, food, sports, transportation, travel, buildings, business, music"
 
     private val wallpaperViewModel: WallpapersViewModel by viewModels {
         WallpaperViewModelFactory((requireContext().applicationContext as MainAplication).wallpapersRepository)
@@ -38,12 +42,13 @@ class SearchWallpaperFragment : Fragment() {
     ): View? {
         binding = FragmentSearchWallpaperBinding.inflate(layoutInflater, container, false)
 
-        /*   val staggeredGridLayoutManager =
-               StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
-   */
         recycleImagesList = binding.recycleImagesList
 
-        //recycleImagesList.layoutManager = staggeredGridLayoutManager
+        binding.swipeContainer.setOnRefreshListener {
+            val words = randomSearch.split(',')
+            val randomNumber = Random.nextInt(0, words.size - 1)
+            searchAndShowWallpapers(words[randomNumber].trim())
+        }
 
         searchAndShowWallpapers("")
 
@@ -55,17 +60,22 @@ class SearchWallpaperFragment : Fragment() {
                 searchAndShowWallpapers("")
             }
         }
-
         return binding.root
     }
 
     private fun searchAndShowWallpapers(userSearchText: String) {
         Log.d("SARCHING", "searchAndShowWallpapers: ENTRO")
+
+        binding.swipeContainer.isRefreshing = true
+
         lifecycleScope.launch(Dispatchers.IO) {
+            val listWalls =
+                wallpaperViewModel.searchWallpaper(userSearch = userSearchText)
             Log.d("SARCHING", "searchAndShowWallpapers: Callin in COrroutine")
             lifecycleScope.launch(Dispatchers.Main) {
-                val listWalls =
-                    wallpaperViewModel.searchWallpaper(userSearch = userSearchText)
+                withContext(Dispatchers.Main) {
+                    binding.swipeContainer.isRefreshing = false
+                }
                 Log.d("SARCHING", "searchAndShowWallpapers: listWallSize: ${listWalls?.size}")
                 listAdapter = SearchListAdapter(listWalls!!)
                 recycleImagesList.swapAdapter(listAdapter, true)
