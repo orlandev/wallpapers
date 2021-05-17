@@ -11,6 +11,4 @@ interface PixabayApi {
         @Query("q", encoded = true) userSearch: String,
         @Query("image_type") imageType: String = "photo"
     ): PixabayJson
-
-
 }

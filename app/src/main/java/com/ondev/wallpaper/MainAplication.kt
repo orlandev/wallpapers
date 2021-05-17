@@ -16,6 +16,7 @@ class MainAplication : Application() {
     )
 
     private val database by lazy { WallpapersRoomDatabase.getDataBase(this) }
-    val userPrefsRepo by lazy { UserPreferencesRepository(dataStore) }
     val wallpapersRepository by lazy { WallpapersRepository(database.wallpapersDao()) }
+    val userPrefsRepo by lazy { UserPreferencesRepository(dataStore) }
+
 }

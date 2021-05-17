@@ -167,7 +167,7 @@ class WallpaperFragment : Fragment() {
     }
 
     private fun startPixabay() {
-        findNavController().navigate(R.id.action_wallpaperFragment_to_imagePickerFragment)
+        findNavController().navigate(R.id.action_wallpaperFragment_to_searchWallpaperFragment)
     }
 
     private fun transferSaldo() {

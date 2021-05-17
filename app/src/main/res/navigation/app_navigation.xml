@@ -16,10 +16,8 @@
             app:enterAnim="@anim/viewpage_transition_in"
             app:exitAnim="@anim/viewpage_transition_out" />
         <action
-            android:id="@+id/action_wallpaperFragment_to_imagePickerFragment"
-            app:destination="@id/imagePickerFragment"
-            app:enterAnim="@anim/viewpage_transition_in"
-            app:exitAnim="@anim/viewpage_transition_out" />
+            android:id="@+id/action_wallpaperFragment_to_searchWallpaperFragment"
+            app:destination="@id/searchWallpaperFragment" />
     </fragment>
     <fragment
         android:id="@+id/about"
@@ -32,8 +30,8 @@
             app:exitAnim="@anim/viewpage_transition_out" />
     </fragment>
     <fragment
-        android:id="@+id/imagePickerFragment"
-        android:name="com.ondev.wallpaper.fragments.ImagePickerFragment"
-        android:label="image_picker_fragment"
-        tools:layout="@layout/image_picker_fragment" />
+        android:id="@+id/searchWallpaperFragment"
+        android:name="com.ondev.wallpaper.fragments.SearchWallpaperFragment"
+        android:label="fragment_search_wallpaper"
+        tools:layout="@layout/fragment_search_wallpaper" />
 </navigation>

@@ -2,13 +2,15 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="4dp">
+    android:layout_margin="4dp"
+    android:layout_height="270dp">
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_margin="4dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,10 +18,115 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/image_item"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY" />
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/image_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_splash_screen"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="32dp"
+                android:src="@drawable/ic_baseline_cloud_download_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginBottom="32dp"
+                android:src="@drawable/ic_like"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="4dp"
+                app:layout_constraintEnd_toEndOf="@+id/image_item"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/white"
+                app:strokeWidth="2dp">
+
+                <ImageView
+                    android:id="@+id/user_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_baseline_camera_alt_24" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="none"
+                android:fadingEdgeLength="40dp"
+                android:requiresFadingEdge="horizontal"
+                android:shadowColor="#000000"
+                android:shadowDx="0.0"
+                android:shadowDy="0.0"
+                android:shadowRadius="2.0"
+                android:text="efwesdfsf"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/materialCardView2"
+                app:layout_constraintEnd_toStartOf="@+id/materialCardView2"
+                app:layout_constraintTop_toTopOf="@+id/materialCardView2" />
+
+            <TextView
+                android:id="@+id/text_image_downloads"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+                android:fadingEdgeLength="40dp"
+                android:requiresFadingEdge="horizontal"
+                android:shadowColor="#000000"
+                android:shadowDx="0.0"
+                android:shadowDy="0.0"
+                android:shadowRadius="2.0"
+                android:text="efwefwef"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toStartOf="@+id/imageView2"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+            <TextView
+                android:id="@+id/text_image_likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+                android:fadingEdgeLength="40dp"
+                android:requiresFadingEdge="horizontal"
+                android:shadowColor="#000000"
+                android:shadowDx="0.0"
+                android:shadowDy="0.0"
+                android:shadowRadius="2.0"
+                android:text="efwefwef"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/imageView3"
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

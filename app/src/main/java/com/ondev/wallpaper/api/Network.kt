@@ -10,10 +10,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 
 object Network {
-
     var pixabayApi: PixabayApi? = null
-
-
     init {
         val client = OkHttpClient().newBuilder()
             .addInterceptor(HttpLoggingInterceptor().apply {
