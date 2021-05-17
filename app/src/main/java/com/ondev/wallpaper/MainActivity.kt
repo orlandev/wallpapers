@@ -7,14 +7,14 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
+import com.ondev.wallpaper.api.Network
+import com.ondev.wallpaper.utils.API_KEY
 import com.ondev.wallpaper.utils.PERMISSION_WRITE_EXTERNAL_STORAGE
 import com.ondev.wallpaper.utils.ShareIt
-import cu.uci.apklisupdate.ApklisUpdate
-import cu.uci.apklisupdate.UpdateCallback
-import cu.uci.apklisupdate.model.AppUpdateInfo
-import cu.uci.apklisupdate.view.ApklisUpdateDialog
-import cu.uci.apklisupdate.view.ApklisUpdateFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,40 +28,6 @@ class MainActivity : AppCompatActivity() {
             statusBarColor = Color.TRANSPARENT
         }
 
-        ApklisUpdate.hasAppUpdate(this, callback = object : UpdateCallback {
-            override fun onNewUpdate(appUpdateInfo: AppUpdateInfo) {
-
-                //Start info alert dialog or do what you want.
-                ApklisUpdateDialog(
-                    this@MainActivity,
-                    appUpdateInfo,
-                    ContextCompat.getColor(
-                        this@MainActivity,
-                        R.color.purple_700
-                    )
-                ).show()
-
-                //Start info fragment or do what you want.
-                supportFragmentManager.beginTransaction().add(
-                    R.id.container, ApklisUpdateFragment.newInstance(
-                        updateInfo = appUpdateInfo,
-                        actionsColor = ContextCompat.getColor(
-                            this@MainActivity,
-                            R.color.purple_700
-                        )
-                    )
-                ).commit()
-
-            }
-
-            override fun onOldUpdate(appUpdateInfo: AppUpdateInfo) {
-                Log.d("MainActivity", "onOldUpdate $appUpdateInfo")
-            }
-
-            override fun onError(e: Throwable) {
-                e.printStackTrace()
-            }
-        })
     }
 
 
@@ -82,3 +48,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+

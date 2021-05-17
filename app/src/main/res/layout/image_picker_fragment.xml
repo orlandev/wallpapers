@@ -13,11 +13,22 @@
             android:id="@+id/line_progressbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:indeterminate="true"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/user_search" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Buscar"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/user_search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/user_search" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/user_search"
@@ -26,7 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
             android:hint="@string/search_image"
             android:padding="8dp"
             app:boxBackgroundColor="@color/white"
@@ -38,8 +48,7 @@
             app:boxStrokeWidthFocused="1dp"
             app:endIconMode="clear_text"
             app:endIconTint="@color/material_on_primary_disabled"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/searchButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:startIconDrawable="@drawable/ic_round_search_24">
@@ -56,15 +65,15 @@
             android:id="@+id/recycle_images_list"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             android:clipToPadding="false"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:paddingBottom="15dp"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="4dp"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_search"
+            app:layout_constraintTop_toBottomOf="@+id/searchButton"
             tools:listitem="@layout/images_list_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
