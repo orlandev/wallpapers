@@ -17,7 +17,9 @@
             app:exitAnim="@anim/viewpage_transition_out" />
         <action
             android:id="@+id/action_wallpaperFragment_to_searchWallpaperFragment"
-            app:destination="@id/searchWallpaperFragment" />
+            app:destination="@id/searchWallpaperFragment"
+            app:enterAnim="@anim/viewpage_transition_in"
+            app:exitAnim="@anim/viewpage_transition_out" />
     </fragment>
     <fragment
         android:id="@+id/about"
@@ -36,6 +38,8 @@
         tools:layout="@layout/fragment_search_wallpaper" >
         <action
             android:id="@+id/action_searchWallpaperFragment_to_wallpaperFragment"
-            app:destination="@id/wallpaperFragment" />
+            app:destination="@id/wallpaperFragment"
+            app:enterAnim="@anim/viewpage_transition_back_in"
+            app:exitAnim="@anim/viewpage_transition_back_out" />
     </fragment>
 </navigation>
