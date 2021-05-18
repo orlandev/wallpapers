@@ -1,7 +1,8 @@
 package com.ondev.wallpaper.adapters
 
+import android.app.Activity
+import android.content.Intent
 import android.net.Uri
-import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +10,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.ondev.wallpaper.R
 import com.ondev.wallpaper.data.Hit
 import com.ondev.wallpaper.data.database.Wallpaper
-import com.ondev.wallpaper.data.database.WallpapersRoomDatabase
 import com.ondev.wallpaper.viewmodels.WallpapersViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -24,6 +26,7 @@ import kotlinx.coroutines.withContext
 
 
 class SearchListAdapter(
+    private val activity: Activity,
     private val jsonPixabayHits: List<Hit>, private val wallpapersViewModel: WallpapersViewModel
 ) : RecyclerView.Adapter<SearchListAdapter.SearchListViewHolder>() {
     inner class SearchListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

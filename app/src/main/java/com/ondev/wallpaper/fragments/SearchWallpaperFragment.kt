@@ -54,6 +54,7 @@ class SearchWallpaperFragment : Fragment() {
 
         searchAndShowWallpapers("")
 
+
         binding.searchButton.setOnClickListener {
             val userSearchText = binding.userSearch.editText!!.text.toString()
             if (userSearchText.isNotEmpty()) {
@@ -79,7 +80,7 @@ class SearchWallpaperFragment : Fragment() {
                     binding.swipeContainer.isRefreshing = false
                 }
                 Log.d("SARCHING", "searchAndShowWallpapers: listWallSize: ${listWalls?.size}")
-                listAdapter = SearchListAdapter(listWalls!!, wallpaperViewModel)
+                listAdapter = SearchListAdapter(requireActivity(), listWalls!!, wallpaperViewModel)
                 recycleImagesList.swapAdapter(listAdapter, true)
                 Log.d("SARCHING", "searchAndShowWallpapers: Calling")
             }
