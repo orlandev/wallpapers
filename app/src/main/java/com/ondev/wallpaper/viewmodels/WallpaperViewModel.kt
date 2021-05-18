@@ -9,13 +9,21 @@ import com.ondev.wallpaper.data.database.Wallpaper
 import com.ondev.wallpaper.data.database.WallpapersRepository
 
 class WallpapersViewModel(private val repository: WallpapersRepository) : ViewModel() {
+
     val allWallpapers: LiveData<List<Wallpaper>> = repository.allWallpapers
+
     fun getRepository(): WallpapersRepository = repository
+
     suspend fun insert(wallpaper: Wallpaper) = repository.insert(wallpaper)
+
     suspend fun update(wallpaper: Wallpaper) = repository.update(wallpaper)
+
     suspend fun deleteByID(id: Int) = repository.deleteByID(id)
-    suspend fun searchWallpaper(userSearch: String): List<Hit>? {
+
+    suspend fun searchWallpapersOnline(userSearch: String): List<Hit>? {
+
         Log.d("WallpaperViewModel", "searchWallpaper: ENTRO AL VIEW MODEL")
+
         return repository.searchWallpapers(userSearch)
     }
 }

@@ -8,9 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.ondev.wallpaper.MainAplication
 import com.ondev.wallpaper.R
 import com.ondev.wallpaper.adapters.SearchListAdapter
@@ -20,7 +19,6 @@ import com.ondev.wallpaper.viewmodels.WallpapersViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.math.log
 import kotlin.random.Random
 
 class SearchWallpaperFragment : Fragment() {
@@ -50,6 +48,10 @@ class SearchWallpaperFragment : Fragment() {
             searchAndShowWallpapers(words[randomNumber].trim())
         }
 
+        binding.backButton.setOnClickListener {
+            findNavController().navigate(R.id.action_searchWallpaperFragment_to_wallpaperFragment)
+        }
+
         searchAndShowWallpapers("")
 
         binding.searchButton.setOnClickListener {
@@ -70,14 +72,14 @@ class SearchWallpaperFragment : Fragment() {
 
         lifecycleScope.launch(Dispatchers.IO) {
             val listWalls =
-                wallpaperViewModel.searchWallpaper(userSearch = userSearchText)
+                wallpaperViewModel.searchWallpapersOnline(userSearch = userSearchText)
             Log.d("SARCHING", "searchAndShowWallpapers: Callin in COrroutine")
             lifecycleScope.launch(Dispatchers.Main) {
                 withContext(Dispatchers.Main) {
                     binding.swipeContainer.isRefreshing = false
                 }
                 Log.d("SARCHING", "searchAndShowWallpapers: listWallSize: ${listWalls?.size}")
-                listAdapter = SearchListAdapter(listWalls!!)
+                listAdapter = SearchListAdapter(listWalls!!, wallpaperViewModel)
                 recycleImagesList.swapAdapter(listAdapter, true)
                 Log.d("SARCHING", "searchAndShowWallpapers: Calling")
             }

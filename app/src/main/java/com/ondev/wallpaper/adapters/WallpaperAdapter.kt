@@ -27,6 +27,7 @@ import com.ondev.wallpaper.R
 import com.ondev.wallpaper.data.database.Wallpaper
 import com.ondev.wallpaper.utils.ShareIt
 import com.ondev.wallpaper.utils.shimmerSetup
+import com.ondev.wallpaper.viewmodels.WallpaperViewModelFactory
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 

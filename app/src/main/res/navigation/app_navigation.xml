@@ -33,5 +33,9 @@
         android:id="@+id/searchWallpaperFragment"
         android:name="com.ondev.wallpaper.fragments.SearchWallpaperFragment"
         android:label="fragment_search_wallpaper"
-        tools:layout="@layout/fragment_search_wallpaper" />
+        tools:layout="@layout/fragment_search_wallpaper" >
+        <action
+            android:id="@+id/action_searchWallpaperFragment_to_wallpaperFragment"
+            app:destination="@id/wallpaperFragment" />
+    </fragment>
 </navigation>
