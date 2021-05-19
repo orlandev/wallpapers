@@ -76,11 +76,10 @@ class SearchWallpaperFragment : Fragment() {
                 wallpaperViewModel.searchWallpapersOnline(userSearch = userSearchText)
             Log.d("SARCHING", "searchAndShowWallpapers: Callin in COrroutine")
             lifecycleScope.launch(Dispatchers.Main) {
-                withContext(Dispatchers.Main) {
-                    binding.swipeContainer.isRefreshing = false
-                }
+                binding.swipeContainer.isRefreshing = false
                 Log.d("SARCHING", "searchAndShowWallpapers: listWallSize: ${listWalls?.size}")
-                listAdapter = SearchListAdapter(requireActivity(), listWalls!!, wallpaperViewModel)
+                listAdapter =
+                    SearchListAdapter(requireActivity(), listWalls!!, wallpaperViewModel)
                 recycleImagesList.swapAdapter(listAdapter, true)
                 Log.d("SARCHING", "searchAndShowWallpapers: Calling")
             }
