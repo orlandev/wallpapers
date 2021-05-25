@@ -120,10 +120,23 @@
                         android:src="@drawable/ic_baseline_wallpaper_24"
                         android:tooltipText="@string/set_wallpaper_tooltip"
                         app:layout_constraintBottom_toBottomOf="@+id/share_app"
-                        app:layout_constraintEnd_toStartOf="@+id/next_wallpaper"
-                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintEnd_toStartOf="@+id/set_lock_screen"
                         app:layout_constraintStart_toEndOf="@+id/share_app"
                         app:layout_constraintTop_toTopOf="@+id/share_app" />
+
+                    <ImageView
+                        android:id="@+id/set_lock_screen"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:clickable="true"
+                        android:src="@drawable/ic_baseline_screen_lock_landscape_24"
+                        android:tooltipText="@string/set_lock_screen_wallpaper_tooltip"
+                        app:layout_constraintBottom_toBottomOf="@+id/share_app"
+                        app:layout_constraintEnd_toStartOf="@+id/next_wallpaper"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/set_wallpaper"
+                        app:layout_constraintTop_toTopOf="@+id/share_app"
+                        app:layout_constraintVertical_bias="0.0" />
 
                     <ImageView
                         android:id="@+id/next_wallpaper"
@@ -135,7 +148,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/set_wallpaper"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/set_wallpaper"
+                        app:layout_constraintStart_toEndOf="@+id/set_lock_screen"
                         app:layout_constraintTop_toTopOf="@+id/set_wallpaper" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

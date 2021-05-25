@@ -22,6 +22,8 @@
     <string name="channel_description">Canal para las notificaciones</string>
     <string name="set_Wallpaper">SI</string>
     <string name="user_set_wallpaper">Deseas poner esta imagen como  fondo de pantalla.</string>
+    <string name="user_set_lockscreen">Deseas poner esta imagen como  de bloqueo.</string>
     <string name="no">No</string>
     <string name="search_image">Fondo a buscar( Ej: Autos, Moda )</string>
+    <string name="set_lock_screen_wallpaper_tooltip">Establecer como pantalla de bloqueo</string>
 </resources>

@@ -17,14 +17,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.ondev.wallpaper.utils.ASSETS_FOLDER
-import com.ondev.wallpaper.BuildConfig
 import com.ondev.wallpaper.MainAplication
 import com.ondev.wallpaper.R
 import com.ondev.wallpaper.adapters.WallpaperAdapter
 import com.ondev.wallpaper.data.database.Wallpaper
 import com.ondev.wallpaper.databinding.FragmentWallpaperViewpagerBinding
 import com.ondev.wallpaper.preferences.UserPreferencesRepository
+import com.ondev.wallpaper.utils.ASSETS_FOLDER
 import com.ondev.wallpaper.utils.WallpaperTransformer
 import com.ondev.wallpaper.viewmodels.WallpaperViewModelFactory
 import com.ondev.wallpaper.viewmodels.WallpapersViewModel
@@ -77,7 +76,7 @@ class WallpaperFragment : Fragment() {
         binding.viewPageWallpaper.setPageTransformer(WallpaperTransformer())
         binding.download.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
-                if (BuildConfig.DEBUG || userPref.getPrefs().userPay) {
+                if (userPref.getPrefs().userPay) {
                     Log.d("TAG", "onCreateView: ENTRANDO!!!")
                     withContext(Dispatchers.Main) { startPixabay() }
                 } else {
