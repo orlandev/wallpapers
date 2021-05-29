@@ -2,32 +2,41 @@ package com.ondev.wallpaper.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.inmersoft.trinidadpatrimonial.core.imageloader.ImageLoader
 import com.ondev.wallpaper.MainAplication
 import com.ondev.wallpaper.R
 import com.ondev.wallpaper.adapters.SearchListAdapter
+import com.ondev.wallpaper.data.database.Wallpaper
 import com.ondev.wallpaper.databinding.FragmentSearchWallpaperBinding
 import com.ondev.wallpaper.viewmodels.WallpaperViewModelFactory
 import com.ondev.wallpaper.viewmodels.WallpapersViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kotlin.random.Random
 
-class SearchWallpaperFragment : Fragment() {
+class SearchWallpaperFragment : Fragment(), SaveWallpaperOnClick {
+
+    private val imageLoader: ImageLoader by lazy {
+        (requireActivity().application as MainAplication).imageLoader
+    }
 
     lateinit var binding: FragmentSearchWallpaperBinding
+
     lateinit var listAdapter: SearchListAdapter
+
     lateinit var recycleImagesList: RecyclerView
 
-    val randomSearch =
+
+    private val randomSearch =
         "backgrounds, fashion, nature, science, education, feelings, health, people, religion, places, animals, industry, computer, food, sports, transportation, travel, buildings, business, music"
 
     private val wallpaperViewModel: WallpapersViewModel by viewModels {
@@ -42,6 +51,10 @@ class SearchWallpaperFragment : Fragment() {
 
         recycleImagesList = binding.recycleImagesList
 
+        listAdapter = SearchListAdapter(this, imageLoader)
+
+        recycleImagesList.adapter = listAdapter
+
         binding.swipeContainer.setOnRefreshListener {
             val words = randomSearch.split(',')
             val randomNumber = Random.nextInt(0, words.size - 1)
@@ -52,8 +65,6 @@ class SearchWallpaperFragment : Fragment() {
             findNavController().navigate(R.id.action_searchWallpaperFragment_to_wallpaperFragment)
         }
 
-        searchAndShowWallpapers("")
-
 
         binding.searchButton.setOnClickListener {
             val userSearchText = binding.userSearch.editText!!.text.toString()
@@ -63,6 +74,9 @@ class SearchWallpaperFragment : Fragment() {
                 searchAndShowWallpapers("")
             }
         }
+
+        searchAndShowWallpapers("")
+
         return binding.root
     }
 
@@ -72,18 +86,21 @@ class SearchWallpaperFragment : Fragment() {
         binding.swipeContainer.isRefreshing = true
 
         lifecycleScope.launch(Dispatchers.IO) {
-            val listWalls =
-                wallpaperViewModel.searchWallpapersOnline(userSearch = userSearchText)
-            Log.d("SARCHING", "searchAndShowWallpapers: Callin in COrroutine")
+            val listWalls = wallpaperViewModel.searchWallpapersOnline(userSearch = userSearchText)
             lifecycleScope.launch(Dispatchers.Main) {
                 binding.swipeContainer.isRefreshing = false
-                Log.d("SARCHING", "searchAndShowWallpapers: listWallSize: ${listWalls?.size}")
-                listAdapter =
-                    SearchListAdapter(requireActivity(), listWalls!!, wallpaperViewModel)
-                recycleImagesList.swapAdapter(listAdapter, true)
-                Log.d("SARCHING", "searchAndShowWallpapers: Calling")
+                listAdapter.setData(listWalls!!)
             }
         }
+    }
+
+    override fun saveOnClick(newWallpaper: Wallpaper) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            wallpaperViewModel.insert(
+                newWallpaper
+            )
+        }
+        Toast.makeText(context, "Imagen guardada.", Toast.LENGTH_SHORT).show()
     }
 
 }

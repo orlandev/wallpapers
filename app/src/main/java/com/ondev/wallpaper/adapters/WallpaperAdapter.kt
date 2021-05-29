@@ -61,8 +61,8 @@ class WallpaperAdapter(
     override fun onBindViewHolder(holder: WallpaperViewHolder, position: Int) {
         val currentWallpaperItem = wallpaperItems[position]
         holder.shimmerLayer.setShimmer(shimmerSetup().build())
-        if (!currentWallpaperItem.Owner.isNullOrEmpty()) {
-            holder.photoOwner.text = "Fotógrafo ${currentWallpaperItem.Owner}"
+        if (!currentWallpaperItem.owner.isNullOrEmpty()) {
+            holder.photoOwner.text = "Fotógrafo ${currentWallpaperItem.owner}"
         } else {
             holder.photoOwner.visibility = View.INVISIBLE
         }
@@ -72,7 +72,7 @@ class WallpaperAdapter(
         }
 
         Glide.with(holder.imageWallpaper.context)
-            .load(Uri.parse(currentWallpaperItem.Url))
+            .load(Uri.parse(currentWallpaperItem.url))
             .placeholder(R.drawable.download)
             .centerCrop()
             .transition(DrawableTransitionOptions.withCrossFade())

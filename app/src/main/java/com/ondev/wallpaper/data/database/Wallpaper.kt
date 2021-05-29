@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "wallpapers")
 data class Wallpaper(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    var Url: String,
-    var Owner: String
+    var url: String,
+    var owner: String,
+    var ownerAvatarUrl: String
 )

@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.inmersoft.trinidadpatrimonial.core.imageloader.ImageLoader
 import com.ondev.wallpaper.MainAplication
 import com.ondev.wallpaper.R
 import com.ondev.wallpaper.adapters.WallpaperAdapter
@@ -43,6 +44,11 @@ class WallpaperFragment : Fragment() {
         WallpaperViewModelFactory((requireContext().applicationContext as MainAplication).wallpapersRepository)
     }
 
+    private val imageLoader: ImageLoader by lazy {
+        (requireActivity().application as MainAplication).imageLoader
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -57,13 +63,12 @@ class WallpaperFragment : Fragment() {
                         Wallpaper(
                             0,
                             "${ASSETS_FOLDER}wallpapers/$wallItem",
-                            ""
+                            "", ""
                         )
                     )
                 }
                 val firstIndex = true
                 userPref.setFirstIndex(firstIndex)
-
             }
         }
         wallpaperViewModel.allWallpapers.observe(viewLifecycleOwner, {
@@ -76,7 +81,7 @@ class WallpaperFragment : Fragment() {
         binding.viewPageWallpaper.setPageTransformer(WallpaperTransformer())
         binding.download.setOnClickListener {
             lifecycleScope.launch(Dispatchers.IO) {
-                if (userPref.getPrefs().userPay) {
+                if (true || userPref.getPrefs().userPay) {
                     Log.d("TAG", "onCreateView: ENTRANDO!!!")
                     withContext(Dispatchers.Main) { startPixabay() }
                 } else {
