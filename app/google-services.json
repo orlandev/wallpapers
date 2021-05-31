@@ -41,6 +41,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662242911307:android:ff9f5c5710d358535c59ce",
+        "android_client_info": {
+          "package_name": "com.ondev.wallpaperpro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "662242911307-dflfllq5dmle5sbklm53ek6d05vj4k6n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ondev.wallpaperpro",
+            "certificate_hash": "4a77ab417b45f07d4181353bf96996557809b81a"
+          }
+        },
+        {
+          "client_id": "662242911307-qrlpe76n0pj03j657cutjqbhng6on545.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM3Dn_Zh1MZPEmCxnIELFt8t0-E7NEgM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "662242911307-qrlpe76n0pj03j657cutjqbhng6on545.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

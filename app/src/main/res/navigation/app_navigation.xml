@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/wallpaperFragment"
-        android:name="com.ondev.wallpaper.fragments.WallpaperFragment"
+        android:name="com.ondev.wallpaperpro.fragments.WallpaperFragment"
         android:label="WallpaperFragment" >
         <action
             android:id="@+id/action_wallpaperFragment_to_about"
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/about"
-        android:name="com.ondev.wallpaper.fragments.AboutFragment"
+        android:name="com.ondev.wallpaperpro.fragments.AboutFragment"
         android:label="About" >
         <action
             android:id="@+id/action_about_to_wallpaperFragment"
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchWallpaperFragment"
-        android:name="com.ondev.wallpaper.fragments.SearchWallpaperFragment"
+        android:name="com.ondev.wallpaperpro.fragments.SearchWallpaperFragment"
         android:label="fragment_search_wallpaper"
         tools:layout="@layout/fragment_search_wallpaper" >
         <action

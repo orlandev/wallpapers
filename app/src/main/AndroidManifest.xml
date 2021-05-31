@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ondev.wallpaper">
+    package="com.ondev.wallpaperpro">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".MainAplication"
+        android:name="com.ondev.wallpaperpro.MainAplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,7 +21,7 @@
             android:value="@string/default_notification_channel_id" />
 
         <receiver
-            android:name=".services.SMSReceiver"
+            android:name="com.ondev.wallpaperpro.services.SMSReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -30,7 +30,7 @@
         </receiver>
 
         <activity
-            android:name="com.ondev.wallpaper.MainActivity"
+            android:name="com.ondev.wallpaperpro.MainActivity"
             android:theme="@style/SplashScreen">
 
             <intent-filter>
@@ -41,7 +41,7 @@
         </activity>
 
         <service
-            android:name=".firebase.WallpaperFirebaseMessageServices"
+            android:name="com.ondev.wallpaperpro.firebase.WallpaperFirebaseMessageServices"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
