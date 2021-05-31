@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.inmersoft.trinidadpatrimonial.core.imageloader.ImageLoader
+import com.ondev.wallpaper.imageloader.ImageLoader
 import com.ondev.wallpaper.MainAplication
 import com.ondev.wallpaper.R
 import com.ondev.wallpaper.adapters.SearchListAdapter

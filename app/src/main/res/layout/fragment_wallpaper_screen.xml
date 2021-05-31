@@ -14,16 +14,18 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
 
-        <ImageView
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/about_app"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginEnd="32dp"
-            android:src="@drawable/ic_baseline_live_help_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_info_24"
+            app:elevation="8dp"
+            app:fabSize="mini"
             app:layout_constraintBottom_toTopOf="@+id/photo_count"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/materialCardView"
+            app:tint="@android:color/white" />
 
-   <TextView
+        <TextView
             android:id="@+id/photo_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,12 +41,32 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/ownerAvatarContainer"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="80dp"
+            android:visibility="visible"
+            app:cardCornerRadius="40dp"
+            app:cardElevation="8dp"
+            app:layout_constraintStart_toStartOf="@+id/image_view_parallax_effect"
+            app:layout_constraintTop_toTopOf="@+id/image_view_parallax_effect"
+            app:strokeColor="@color/stroke_owner_avatar"
+            app:strokeWidth="4dp">
+
+            <ImageView
+                android:id="@+id/owner_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+        </com.google.android.material.card.MaterialCardView>
+
         <TextView
             android:id="@+id/photo_owner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="8dp"
             android:shadowColor="#000000"
             android:shadowDx="0.0"
             android:shadowDy="0.0"
@@ -54,8 +76,11 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/image_view_parallax_effect" />
+
+            app:layout_constraintEnd_toEndOf="@+id/ownerAvatarContainer"
+            app:layout_constraintStart_toStartOf="@+id/ownerAvatarContainer"
+            app:layout_constraintTop_toBottomOf="@+id/ownerAvatarContainer" />
+
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
@@ -154,5 +179,20 @@
 
             </com.facebook.shimmer.ShimmerFrameLayout>
         </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_round_downloading_24"
+            app:elevation="8dp"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@+id/about_app"
+            app:layout_constraintEnd_toEndOf="@+id/about_app"
+            app:layout_constraintStart_toStartOf="@+id/about_app"
+            app:tint="@android:color/white" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

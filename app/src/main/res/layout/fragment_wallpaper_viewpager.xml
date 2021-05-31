@@ -17,18 +17,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/download"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            app:tint="@android:color/white"
-            android:layout_marginEnd="24dp"
-            android:src="@drawable/ic_round_downloading_24"
-            app:fabSize="mini"
-            app:layout_constraintEnd_toEndOf="@+id/view_page_wallpaper"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

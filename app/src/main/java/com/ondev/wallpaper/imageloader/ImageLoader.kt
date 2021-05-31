@@ -1,4 +1,4 @@
-package com.inmersoft.trinidadpatrimonial.core.imageloader
+package com.ondev.wallpaper.imageloader
 
 import android.widget.ImageView
 

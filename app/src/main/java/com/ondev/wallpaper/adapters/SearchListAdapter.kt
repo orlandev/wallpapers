@@ -3,7 +3,7 @@ package com.ondev.wallpaper.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.inmersoft.trinidadpatrimonial.core.imageloader.ImageLoader
+import com.ondev.wallpaper.imageloader.ImageLoader
 import com.ondev.wallpaper.data.Hit
 import com.ondev.wallpaper.databinding.ImagesListItemBinding
 import com.ondev.wallpaper.fragments.SaveWallpaperOnClick

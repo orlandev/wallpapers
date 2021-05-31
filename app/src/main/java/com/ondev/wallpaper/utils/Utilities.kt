@@ -6,6 +6,8 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
+import android.view.Gravity
+import android.widget.Toast
 import com.facebook.shimmer.Shimmer
 import com.ondev.wallpaper.R
 
@@ -19,7 +21,7 @@ fun shimmerSetup(): Shimmer.AlphaHighlightBuilder {
 fun ShareIt(context: Context) {
     val bm = BitmapFactory.decodeResource(
         context.resources,
-        R.drawable.share_app
+        R.drawable.splash_app_icon
     )
     val intent = Intent(Intent.ACTION_SEND_MULTIPLE)
     intent.putExtra(
@@ -37,3 +39,15 @@ fun ShareIt(context: Context) {
         )
     )
 }
+
+fun showToast(message: String, ctx: Context) {
+    var toast =
+        Toast.makeText(
+            ctx,
+            message,
+            Toast.LENGTH_SHORT
+        )
+    toast.setGravity(Gravity.CENTER, 0, 0)
+    toast.show()
+}
+

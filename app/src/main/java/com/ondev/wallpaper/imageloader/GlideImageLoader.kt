@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.ondev.wallpaper.imageloader.ImageLoader
 
 class GlideImageLoader(private val context: Context) : ImageLoader {
 

@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:textSize="12sp"
-            android:text="Para activar la descarga de imágenes desde internet, usted debe transferir el monto de $10 que es el costo de la aplicación de pago en apklis.cu. ¿Por qué?, para obtener los mismos beneficios de la aplicación de pago que está en apklis; esta idea es para las personas que no pueden comprar la aplicación por no tener transfermóvil o cualquier problema que le haya surgido a la hora de comprar la aplicación. Solo debe poner su clave de transferencia y la app se encargará del resto. La app espera a que llegue el mensaje de confirmación de transferencia de Cubacel para completar el proceso, por tanto debe permitir a la aplicación leer sus SMS entrantes de lo contrario no podrá habilitarse la descarga. "
+            android:text="@string/user_payform_text"
 
             android:textColor="@color/black" />
 

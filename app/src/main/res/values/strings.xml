@@ -26,4 +26,5 @@
     <string name="no">No</string>
     <string name="search_image">Fondo a buscar( Ej: Autos, Moda )</string>
     <string name="set_lock_screen_wallpaper_tooltip">Establecer como pantalla de bloqueo</string>
+    <string name="user_payform_text">Para activar la descarga de imágenes desde internet, usted debe transferir el monto de $10 que es el costo de la aplicación de pago en apklis.cu. ¿Por qué?, para obtener los mismos beneficios de la aplicación de pago. Esta forma de pago es para las personas que no pueden comprar aplicaciones por no tener transfermóvil o cualquier problema que le haya surgido a la hora de comprar la aplicación. Solo debe poner su clave de transferencia y la app se encargará del resto. La app espera a que llegue el mensaje de confirmación de transferencia de Cubacel para completar el proceso, por tanto debe permitir a la aplicación leer sus SMS entrantes de lo contrario no podrá habilitarse la descarga.</string>
 </resources>

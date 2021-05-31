@@ -1,10 +1,14 @@
 package com.ondev.wallpaper.fragments
 
 import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
+import android.app.WallpaperManager
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,20 +16,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.inmersoft.trinidadpatrimonial.core.imageloader.ImageLoader
 import com.ondev.wallpaper.MainAplication
 import com.ondev.wallpaper.R
 import com.ondev.wallpaper.adapters.WallpaperAdapter
 import com.ondev.wallpaper.data.database.Wallpaper
 import com.ondev.wallpaper.databinding.FragmentWallpaperViewpagerBinding
+import com.ondev.wallpaper.imageloader.ImageLoader
 import com.ondev.wallpaper.preferences.UserPreferencesRepository
-import com.ondev.wallpaper.utils.ASSETS_FOLDER
-import com.ondev.wallpaper.utils.WallpaperTransformer
+import com.ondev.wallpaper.utils.*
 import com.ondev.wallpaper.viewmodels.WallpaperViewModelFactory
 import com.ondev.wallpaper.viewmodels.WallpapersViewModel
 import kotlinx.coroutines.Dispatchers
@@ -33,7 +37,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class WallpaperFragment : Fragment() {
+class WallpaperFragment : Fragment(), IAndroidApi {
     private val CALL_REQUEST_PERMISSION: Int = 7854
     private lateinit var binding: FragmentWallpaperViewpagerBinding
     private lateinit var userPref: UserPreferencesRepository
@@ -48,6 +52,9 @@ class WallpaperFragment : Fragment() {
         (requireActivity().application as MainAplication).imageLoader
     }
 
+    private val wallpaperAdapter: WallpaperAdapter by lazy {
+        WallpaperAdapter(this@WallpaperFragment, imageLoader)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,37 +78,16 @@ class WallpaperFragment : Fragment() {
                 userPref.setFirstIndex(firstIndex)
             }
         }
-        wallpaperViewModel.allWallpapers.observe(viewLifecycleOwner, {
-            binding.viewPageWallpaper.adapter = WallpaperAdapter(
-                it
-            )
+
+        binding.viewPageWallpaper.adapter = wallpaperAdapter
+
+        wallpaperViewModel.allWallpapers.observe(viewLifecycleOwner, { listChanges ->
+            wallpaperAdapter.setData(listChanges)
         })
 
 
         binding.viewPageWallpaper.setPageTransformer(WallpaperTransformer())
-        binding.download.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-                if (true || userPref.getPrefs().userPay) {
-                    Log.d("TAG", "onCreateView: ENTRANDO!!!")
-                    withContext(Dispatchers.Main) { startPixabay() }
-                } else {
-                    withContext(Dispatchers.Main) {
-                        if (ContextCompat.checkSelfPermission(
-                                requireContext(),
-                                Manifest.permission.RECEIVE_SMS
-                            ) == PackageManager.PERMISSION_GRANTED
-                        ) {
-                            showTransferAlert()
-                        } else {
-                            requestPermissions(
-                                arrayOf(Manifest.permission.RECEIVE_SMS),
-                                SMS_RECEIVE_PERMISSION_CODE
-                            )
-                        }
-                    }
-                }
-            }
-        }
+
         return binding.root
     }
 
@@ -126,7 +112,7 @@ class WallpaperFragment : Fragment() {
             context
         )
         builder.setTitle("Habilitar Descarga")
-        builder.setIcon(R.drawable.icon_splash_screen)
+        builder.setIcon(R.drawable.splash_app_icon)
         val viewInflated: View = LayoutInflater.from(context)
             .inflate(
                 R.layout.user_transfer_pass,
@@ -139,7 +125,7 @@ class WallpaperFragment : Fragment() {
             R.string.transferir
         ) { dialog, _ ->
             val userInput = input.text.toString()
-            if (!userInput.isNullOrEmpty()) {
+            if (userInput.isNotEmpty()) {
                 Log.d("TAG", "showTransferAlert: $userInput")
                 dialog.dismiss()
                 USER_TRANSFER_KEY = userInput
@@ -165,7 +151,7 @@ class WallpaperFragment : Fragment() {
         }
         builder.setNegativeButton(
             R.string.cancel
-        ) { dialog, which -> dialog.cancel() }
+        ) { dialog, _ -> dialog.cancel() }
 
         builder.show()
     }
@@ -175,10 +161,132 @@ class WallpaperFragment : Fragment() {
     }
 
     private fun transferSaldo() {
-        if (!USER_TRANSFER_KEY.isNullOrEmpty()) {
+        if (USER_TRANSFER_KEY.isNotEmpty()) {
             var urltransfer = "*234*1*54074127*$USER_TRANSFER_KEY*10${Uri.encode("#")}"
             val callIntent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$urltransfer"))
             requireContext().startActivity(callIntent)
+        }
+    }
+
+    //TODO( REFACTORIZAR ESTO... NO ME GUSTA )
+    override fun showAlertAndSetWallpaper(wallpaperAsBitmap: Bitmap, WALLPAPERMANAGER_FLAG: Int) {
+
+        val messageTitle = if (WALLPAPERMANAGER_FLAG == WallpaperManager.FLAG_SYSTEM) {
+            "Establecer como fondo de pantalla."
+        } else {
+            "Establecer como pantalla de bloqueo"
+        }
+
+        val message = if (WALLPAPERMANAGER_FLAG == WallpaperManager.FLAG_SYSTEM) {
+            R.string.user_set_wallpaper
+        } else {
+            R.string.user_set_lockscreen
+        }
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(messageTitle)
+        builder.setMessage(message)
+        builder.setIcon(R.drawable.splash_app_icon)
+        builder.setPositiveButton(
+            R.string.set_Wallpaper
+        ) { dialog, _ ->
+            dialog.dismiss()
+
+            val wallpaperManager =
+                WallpaperManager.getInstance(requireContext())
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                if (wallpaperManager.isSetWallpaperAllowed) {
+                    wallpaperManager.setBitmap(
+                        wallpaperAsBitmap,
+                        null,
+                        true,
+                        WALLPAPERMANAGER_FLAG
+                    )
+                    if (WALLPAPERMANAGER_FLAG == WallpaperManager.FLAG_LOCK) {
+                        showToast("Se ha establecido la pantalla de bloqueo.", requireContext())
+                    } else {
+                        showToast("Se ha establecido el fondo de pantalla.", requireContext())
+                    }
+                } else {
+                    showToast("Imposible establecer el fondo de pantalla.", requireContext())
+                }
+            } else {
+                if (WALLPAPERMANAGER_FLAG == WallpaperManager.FLAG_LOCK) {
+                    showToast("Imposible establecer la pantala de bloqueo.", requireContext())
+                } else {
+                    wallpaperManager.setBitmap(wallpaperAsBitmap)
+                    showToast("Se ha establecido el fondo de pantalla.", requireContext())
+                }
+            }
+        }
+        builder.setNegativeButton(
+            R.string.no
+        ) { dialog, _ -> dialog.cancel() }
+
+        builder.show()
+    }
+
+    override fun sharedApp() {
+        when (PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) -> {
+                ShareIt(requireContext())
+            }
+            else -> {
+                ActivityCompat.requestPermissions(
+                    context as Activity,
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    PERMISSION_WRITE_EXTERNAL_STORAGE
+                )
+            }
+        }
+    }
+
+    override fun nextWallpaperPage() {
+        val maxWallpaperPage = wallpaperAdapter.itemCount
+        val viewPager = binding.viewPageWallpaper
+
+        Log.d("TAG", "nextWallpaperPage: ${viewPager.currentItem} / $maxWallpaperPage")
+        if (viewPager.currentItem < maxWallpaperPage) {
+            viewPager.setCurrentItem(viewPager.currentItem + 1, true)
+        }
+    }
+
+    override fun backWallpaperPage() {
+        val viewPager = binding.viewPageWallpaper
+        val currentPageIndex = viewPager.currentItem
+        if (currentPageIndex > 0) {
+            viewPager.setCurrentItem(viewPager.currentItem - 1, true)
+        }
+    }
+
+    override fun navToAboutAppFragment() {
+        findNavController().navigate(R.id.action_wallpaperFragment_to_about)
+    }
+
+    override fun navToPixabayFragment() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            if (userPref.getPrefs().userPay) {
+                withContext(Dispatchers.Main) { startPixabay() }
+            } else {
+                withContext(Dispatchers.Main) {
+                    if (ContextCompat.checkSelfPermission(
+                            requireContext(),
+                            Manifest.permission.RECEIVE_SMS
+                        ) == PackageManager.PERMISSION_GRANTED
+                    ) {
+                        showTransferAlert()
+                    } else {
+                        requestPermissions(
+                            arrayOf(Manifest.permission.RECEIVE_SMS),
+                            SMS_RECEIVE_PERMISSION_CODE
+                        )
+                    }
+                }
+            }
         }
     }
 }
