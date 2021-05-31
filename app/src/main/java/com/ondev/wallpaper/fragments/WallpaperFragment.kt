@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.ondev.wallpaper.BuildConfig
 import com.ondev.wallpaper.MainAplication
 import com.ondev.wallpaper.R
 import com.ondev.wallpaper.adapters.WallpaperAdapter
@@ -268,25 +269,30 @@ class WallpaperFragment : Fragment(), IAndroidApi {
     }
 
     override fun navToPixabayFragment() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            if (userPref.getPrefs().userPay) {
-                withContext(Dispatchers.Main) { startPixabay() }
-            } else {
-                withContext(Dispatchers.Main) {
-                    if (ContextCompat.checkSelfPermission(
-                            requireContext(),
-                            Manifest.permission.RECEIVE_SMS
-                        ) == PackageManager.PERMISSION_GRANTED
-                    ) {
-                        showTransferAlert()
-                    } else {
-                        requestPermissions(
-                            arrayOf(Manifest.permission.RECEIVE_SMS),
-                            SMS_RECEIVE_PERMISSION_CODE
-                        )
+        if (BuildConfig.APPLICATION_ID == "com.ondev.wallpaper") {
+
+            lifecycleScope.launch(Dispatchers.IO) {
+                if (userPref.getPrefs().userPay) {
+                    withContext(Dispatchers.Main) { startPixabay() }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        if (ContextCompat.checkSelfPermission(
+                                requireContext(),
+                                Manifest.permission.RECEIVE_SMS
+                            ) == PackageManager.PERMISSION_GRANTED
+                        ) {
+                            showTransferAlert()
+                        } else {
+                            requestPermissions(
+                                arrayOf(Manifest.permission.RECEIVE_SMS),
+                                SMS_RECEIVE_PERMISSION_CODE
+                            )
+                        }
                     }
                 }
             }
+        } else if (BuildConfig.APPLICATION_ID == "com.ondev.wallpaperpro") {
+            startPixabay()
         }
     }
 }
