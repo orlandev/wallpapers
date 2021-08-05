@@ -22,15 +22,11 @@ class SearchListViewHolder(
 
         imageLoader.loadImage(
             Uri.parse(pixabayHits.webformatURL).toString(),
-            binding.imageItem,
-            R.drawable.download,
-            R.drawable.download
+            binding.imageItem
         )
         imageLoader.loadImage(
             Uri.parse(pixabayHits.userImageURL).toString(),
-            binding.userAvatar,
-            R.drawable.download,
-            R.drawable.download
+            binding.userAvatar
         )
 
         binding.userName.text = pixabayHits.user

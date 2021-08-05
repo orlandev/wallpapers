@@ -21,6 +21,7 @@ import com.ondev.wallpaper.viewmodels.WallpaperViewModelFactory
 import com.ondev.wallpaper.viewmodels.WallpapersViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.random.Random
 
 class SearchWallpaperFragment : Fragment(), SaveWallpaperOnClick {
@@ -82,24 +83,24 @@ class SearchWallpaperFragment : Fragment(), SaveWallpaperOnClick {
 
     private fun searchAndShowWallpapers(userSearchText: String) {
         Log.d("SARCHING", "searchAndShowWallpapers: ENTRO")
-
-        binding.swipeContainer.isRefreshing = true
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            val listWalls = wallpaperViewModel.searchWallpapersOnline(userSearch = userSearchText)
-            lifecycleScope.launch(Dispatchers.Main) {
-                binding.swipeContainer.isRefreshing = false
-                listAdapter.setData(listWalls!!)
+        lifecycleScope.launch(Dispatchers.Main) {
+            binding.swipeContainer.isRefreshing = true
+            val listWalls = withContext(Dispatchers.IO) {
+                wallpaperViewModel.searchWallpapersOnline(
+                    userSearch = userSearchText
+                )
             }
+            binding.swipeContainer.isRefreshing = false
+            listAdapter.submitList(listWalls!!)
         }
     }
 
     override fun saveOnClick(newWallpaper: Wallpaper) {
-        lifecycleScope.launch(Dispatchers.IO) {
+
             wallpaperViewModel.insert(
                 newWallpaper
             )
-        }
+
         Toast.makeText(context, "Imagen guardada.", Toast.LENGTH_SHORT).show()
     }
 

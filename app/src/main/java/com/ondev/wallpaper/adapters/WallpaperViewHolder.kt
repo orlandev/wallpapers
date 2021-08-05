@@ -31,8 +31,6 @@ class WallpaperViewHolder(
             imageLoader.loadImage(
                 currentWallpaperItem.ownerAvatarUrl,
                 binding.ownerAvatar,
-                R.drawable.download,
-                R.drawable.download
             )
         } else {
             binding.photoOwner.visibility = View.INVISIBLE
@@ -53,8 +51,6 @@ class WallpaperViewHolder(
         imageLoader.loadImage(
             Uri.parse(currentWallpaperItem.url).toString(),
             binding.imageViewParallaxEffect,
-            R.drawable.download,
-            R.drawable.download
         )
 
         binding.backWallpaper.setOnClickListener {

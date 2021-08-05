@@ -2,6 +2,8 @@ package com.ondev.wallpaper.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ondev.wallpaper.imageloader.ImageLoader
 import com.ondev.wallpaper.data.Hit
@@ -11,9 +13,23 @@ import com.ondev.wallpaper.fragments.SaveWallpaperOnClick
 
 class SearchListAdapter(
     private val saveWallpaperOnClick: SaveWallpaperOnClick, private val imageLoader: ImageLoader
-) : RecyclerView.Adapter<SearchListViewHolder>() {
+) : ListAdapter<Hit, SearchListViewHolder>(SearchDiffUtil()) {
 
-    private val jsonPixabayHits = mutableListOf<Hit>()
+    class SearchDiffUtil : DiffUtil.ItemCallback<Hit>() {
+        override fun areContentsTheSame(oldItem: Hit, newItem: Hit): Boolean {
+            return oldItem.id == newItem.id
+                    && oldItem.user_id == newItem.user_id
+                    && oldItem.user == newItem.user
+                    && oldItem.largeImageURL == newItem.largeImageURL
+        }
+
+        override fun areItemsTheSame(oldItem: Hit, newItem: Hit): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+
+    }
+
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -26,19 +42,11 @@ class SearchListAdapter(
         )
     }
 
-    fun setData(newData: List<Hit>) {
-        jsonPixabayHits.clear()
-        jsonPixabayHits.addAll(newData)
-        notifyDataSetChanged()
-    }
 
     override fun onBindViewHolder(holder: SearchListViewHolder, position: Int) {
-        val currentPixabayHit = jsonPixabayHits[position]
+        val currentPixabayHit = getItem(position)
         holder.bindData(currentPixabayHit)
     }
 
-    override fun getItemCount(): Int {
-        return jsonPixabayHits.size
-    }
 }
 

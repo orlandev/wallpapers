@@ -4,9 +4,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.ondev.wallpaper.data.Hit
 import com.ondev.wallpaper.data.database.Wallpaper
 import com.ondev.wallpaper.data.database.WallpapersRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class WallpapersViewModel(private val repository: WallpapersRepository) : ViewModel() {
 
@@ -14,16 +17,17 @@ class WallpapersViewModel(private val repository: WallpapersRepository) : ViewMo
 
     fun getRepository(): WallpapersRepository = repository
 
-    suspend fun insert(wallpaper: Wallpaper) = repository.insert(wallpaper)
+    fun insert(wallpaper: Wallpaper) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insert(wallpaper)
+        }
+    }
 
     suspend fun update(wallpaper: Wallpaper) = repository.update(wallpaper)
 
     suspend fun deleteByID(id: Int) = repository.deleteByID(id)
 
     suspend fun searchWallpapersOnline(userSearch: String): List<Hit>? {
-
-        Log.d("WallpaperViewModel", "searchWallpaper: ENTRO AL VIEW MODEL")
-
         return repository.searchWallpapers(userSearch)
     }
 }

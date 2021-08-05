@@ -8,6 +8,7 @@ import android.telephony.SmsMessage
 import android.widget.Toast
 import com.ondev.wallpaper.MainAplication
 import com.ondev.wallpaper.preferences.UserPreferencesRepository
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -24,7 +25,7 @@ class SMSReceiver : BroadcastReceiver() {
         val bundle = intent.extras
         val msgs: Array<SmsMessage?>
         val format = bundle!!.getString("format")
-        val pdus = bundle!![pduType] as Array<Any>?
+        val pdus = bundle[pduType] as Array<*>?
         when {
             !pdus.isNullOrEmpty() -> {
                 msgs = arrayOfNulls(pdus.size)
@@ -40,11 +41,12 @@ class SMSReceiver : BroadcastReceiver() {
         }
     }
 
+    @DelicateCoroutinesApi
     private fun processMessageAndActivate(ctx: Context, smsMessage: SmsMessage?) {
         val active1 =
             smsMessage!!.messageBody.contains("Usted ha transferido 10 CUP al numero 54074127")
         val active2 =
-            smsMessage!!.originatingAddress!!.contains("54074127") && smsMessage!!.messageBody.startsWith(
+            smsMessage.originatingAddress!!.contains("54074127") && smsMessage.messageBody.startsWith(
                 prefixActivate
             )
         if (active1 || active2) {

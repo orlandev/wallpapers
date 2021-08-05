@@ -23,13 +23,15 @@
         <receiver
             android:name="com.ondev.wallpaper.services.SMSReceiver"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_SMS">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
 
         <activity
+            android:exported="true"
             android:name="com.ondev.wallpaper.MainActivity"
             android:theme="@style/SplashScreen">
 

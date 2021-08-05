@@ -24,8 +24,8 @@ class WallpapersRepository(private val wallpapersDao: WallpapersDao) {
     suspend fun searchWallpapers(userSearch: String): List<Hit>? {
         Log.d("SARCHING", "searchWallpapers: ENTRO AL REPOSITORIO")
         val data = Network.pixabayApi!!.searchWallpapers(API_KEY, userSearch)
-        Log.d("SARCHING", "searchWallpapers: ${data.toString()}")
-        Log.d("SARCHING", "fetchWallpapers: ${data?.hits?.size}")
-        return data?.hits
+        Log.d("SARCHING", "searchWallpapers: $data")
+        Log.d("SARCHING", "fetchWallpapers: ${data.hits.size}")
+        return data.hits
     }
 }

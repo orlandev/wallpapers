@@ -2,6 +2,8 @@ package com.ondev.wallpaper.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ondev.wallpaper.data.database.Wallpaper
 import com.ondev.wallpaper.databinding.FragmentWallpaperScreenBinding
@@ -11,9 +13,19 @@ import com.ondev.wallpaper.imageloader.ImageLoader
 
 class WallpaperAdapter(
     private val androidApiCalls: IAndroidApi, private val imageLoader: ImageLoader
-) : RecyclerView.Adapter<WallpaperViewHolder>() {
+) : ListAdapter<Wallpaper, WallpaperViewHolder>(WallpaperDiffUtil()) {
+    class WallpaperDiffUtil : DiffUtil.ItemCallback<Wallpaper>() {
+        override fun areItemsTheSame(oldItem: Wallpaper, newItem: Wallpaper): Boolean {
+            return oldItem.id == newItem.id
+        }
 
-    private val wallpaperItems = mutableListOf<Wallpaper>()
+        override fun areContentsTheSame(oldItem: Wallpaper, newItem: Wallpaper): Boolean {
+            return oldItem.owner == newItem.owner
+                    && oldItem.ownerAvatarUrl == newItem.ownerAvatarUrl
+                    && oldItem.url == newItem.url
+        }
+
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -26,18 +38,9 @@ class WallpaperAdapter(
         )
     }
 
-    fun setData(newWallsList: List<Wallpaper>) {
-        wallpaperItems.clear()
-        wallpaperItems.addAll(newWallsList)
-        notifyDataSetChanged()
-    }
-
     override fun onBindViewHolder(holder: WallpaperViewHolder, position: Int) {
-        val currentWallpaperItem = wallpaperItems[position]
-        holder.bindData(currentWallpaperItem, wallpaperItems.size, position)
+        val currentWallpaperItem = getItem(position)
+        holder.bindData(currentWallpaperItem, itemCount, position)
     }
 
-    override fun getItemCount(): Int {
-        return wallpaperItems.size
-    }
 }
