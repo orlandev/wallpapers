@@ -11,7 +11,9 @@ import com.ondev.wallpaper.preferences.UserPreferencesRepository
 
 class MainAplication : Application() {
 
-    private val USER_PREFERENCES_NAME = "user_preferences"
+    companion object {
+        private const val USER_PREFERENCES_NAME = "user_preferences"
+    }
 
     private val Context.dataStore by preferencesDataStore(
         name = USER_PREFERENCES_NAME

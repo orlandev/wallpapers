@@ -6,7 +6,6 @@ import com.squareup.moshi.JsonClass
 data class Hit(
     val comments: Int,
     val downloads: Int,
-    val favorites: Int,
     val id: Int,
     val imageHeight: Int,
     val imageSize: Int,

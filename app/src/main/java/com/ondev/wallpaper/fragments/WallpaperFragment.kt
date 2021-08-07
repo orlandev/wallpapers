@@ -45,7 +45,10 @@ class WallpaperFragment : Fragment(), IAndroidApi {
     }
 
     private lateinit var binding: FragmentWallpaperViewpagerBinding
-    private lateinit var userPref: UserPreferencesRepository
+
+    private val userPref: UserPreferencesRepository by lazy {
+        ((requireContext().applicationContext as MainAplication).userPrefsRepo)
+    }
 
     private lateinit var USER_TRANSFER_KEY: String
 
@@ -65,7 +68,6 @@ class WallpaperFragment : Fragment(), IAndroidApi {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        userPref = ((requireContext().applicationContext as MainAplication).userPrefsRepo)
         FragmentWallpaperViewpagerBinding.inflate(inflater, container, false).also { binding = it }
         lifecycleScope.launch(Dispatchers.IO) {
             if (!userPref.isFirstIndex()) {
@@ -73,7 +75,6 @@ class WallpaperFragment : Fragment(), IAndroidApi {
                 wallpaperFolder?.forEach { wallItem ->
                     wallpaperViewModel.insert(
                         Wallpaper(
-                            0,
                             "${ASSETS_FOLDER}wallpapers/$wallItem",
                             "", ""
                         )
@@ -116,7 +117,7 @@ class WallpaperFragment : Fragment(), IAndroidApi {
         val builder = AlertDialog.Builder(
             context
         )
-        builder.setTitle("Habilitar Descarga")
+        builder.setTitle(R.string.enable_download)
         builder.setIcon(R.drawable.splash_app_icon)
         val viewInflated: View = LayoutInflater.from(context)
             .inflate(
@@ -273,30 +274,37 @@ class WallpaperFragment : Fragment(), IAndroidApi {
     }
 
     override fun navToPixabayFragment() {
-        if (BuildConfig.APPLICATION_ID == "com.ondev.wallpaper") {
+        if(BuildConfig.DEBUG){
+            startPixabay()
+        }else {
+            when (BuildConfig.APPLICATION_ID) {
+                "com.ondev.wallpaper" -> {
 
-            lifecycleScope.launch(Dispatchers.IO) {
-                if (userPref.getPrefs().userPay) {
-                    withContext(Dispatchers.Main) { startPixabay() }
-                } else {
-                    withContext(Dispatchers.Main) {
-                        if (ContextCompat.checkSelfPermission(
-                                requireContext(),
-                                Manifest.permission.RECEIVE_SMS
-                            ) == PackageManager.PERMISSION_GRANTED
-                        ) {
-                            showTransferAlert()
+                    lifecycleScope.launch(Dispatchers.IO) {
+                    if (userPref.getPrefs().userPay) {
+                            withContext(Dispatchers.Main) { startPixabay() }
                         } else {
-                            requestPermissions(
-                                arrayOf(Manifest.permission.RECEIVE_SMS),
-                                SMS_RECEIVE_PERMISSION_CODE
-                            )
+                            withContext(Dispatchers.Main) {
+                                if (ContextCompat.checkSelfPermission(
+                                        requireContext(),
+                                        Manifest.permission.RECEIVE_SMS
+                                    ) == PackageManager.PERMISSION_GRANTED
+                                ) {
+                                    showTransferAlert()
+                                } else {
+                                    requestPermissions(
+                                        arrayOf(Manifest.permission.RECEIVE_SMS),
+                                        SMS_RECEIVE_PERMISSION_CODE
+                                    )
+                                }
+                            }
                         }
                     }
                 }
+                "com.ondev.wallpaperpro" -> {
+                    startPixabay()
+                }
             }
-        } else if (BuildConfig.APPLICATION_ID == "com.ondev.wallpaperpro") {
-            startPixabay()
         }
     }
 }

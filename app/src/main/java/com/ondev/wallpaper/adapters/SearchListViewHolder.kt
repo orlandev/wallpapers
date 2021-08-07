@@ -36,7 +36,6 @@ class SearchListViewHolder(
         binding.downloadButton.setOnClickListener {
             saveWallpaperOnClick.saveOnClick(
                 Wallpaper(
-                    0,
                     pixabayHits.webformatURL,
                     pixabayHits.user,
                     pixabayHits.userImageURL
